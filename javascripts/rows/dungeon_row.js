@@ -19,7 +19,13 @@ class DungeonRow {
   }
 
   clearDestroyed() {
-    
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length) {
+        if (this.spaces[i][0].destroyed) {
+          this.spaces[i].pop();
+        }
+      }
+    }
   }
 
 }

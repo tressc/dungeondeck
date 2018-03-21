@@ -77,6 +77,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 document.addEventListener("DOMContentLoaded", () => {
   window.Card = __WEBPACK_IMPORTED_MODULE_0__cards_card_js__["a" /* default */];
   window.DungeonRow = __WEBPACK_IMPORTED_MODULE_1__rows_dungeon_row_js__["a" /* default */];
+
+  window.a = new __WEBPACK_IMPORTED_MODULE_1__rows_dungeon_row_js__["a" /* default */];
+  window.a.spaces[3].push(new __WEBPACK_IMPORTED_MODULE_0__cards_card_js__["a" /* default */](2, 5));
+  window.a.updateCount();
 });
 
 
@@ -130,7 +134,13 @@ class DungeonRow {
   }
 
   clearDestroyed() {
-    
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length) {
+        if (this.spaces[i][0].destroyed) {
+          this.spaces[i].pop();
+        }
+      }
+    }
   }
 
 }
@@ -140,3 +150,4 @@ class DungeonRow {
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map
