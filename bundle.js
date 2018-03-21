@@ -69,20 +69,11 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deck_js__ = __webpack_require__(5);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(6);
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  window.Card = __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */];
-  window.DungeonRow = __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__["a" /* default */];
-  window.a = new __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__["a" /* default */];
-  window.a.spaces[3].push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](2, 5));
-  window.a.updateCount();
-  window.b = new __WEBPACK_IMPORTED_MODULE_2__deck_js__["a" /* default */];
+  window.a = new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */];
 });
 
 
@@ -161,6 +152,14 @@ class DungeonRow {
     }
   }
 
+  fillEmpties(arr) {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length === 0 && arr.length > 0) {
+        this.spaces[i].push(arr.pop());
+      }
+    }
+    this.updateCount();
+  }
 
 
 }
@@ -218,8 +217,7 @@ class Deck {
     }
   }
 
-  draw() {
-    let n = 3;
+  draw(n) {
     const drawnCards = [];
     while (this.count > 0 && n > 0) {
       drawnCards.push(this.deck.pop());
@@ -236,6 +234,34 @@ class Deck {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (Deck);
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__deck_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__ = __webpack_require__(4);
+
+
+
+class Board {
+
+  constructor() {
+    this.Deck = new __WEBPACK_IMPORTED_MODULE_0__deck_js__["a" /* default */];
+    this.DungeonRow = new __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__["a" /* default */];
+    this.populateDungeon(4);
+  }
+
+  populateDungeon(n) {
+    const newCards = this.Deck.draw(n);
+    this.DungeonRow.fillEmpties(newCards);
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Board);
 
 
 /***/ })

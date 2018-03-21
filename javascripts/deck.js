@@ -42,8 +42,7 @@ class Deck {
     }
   }
 
-  draw() {
-    let n = 3;
+  draw(n) {
     const drawnCards = [];
     while (this.count > 0 && n > 0) {
       drawnCards.push(this.deck.pop());

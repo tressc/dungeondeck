@@ -28,6 +28,14 @@ class DungeonRow {
     }
   }
 
+  fillEmpties(arr) {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length === 0 && arr.length > 0) {
+        this.spaces[i].push(arr.pop());
+      }
+    }
+    this.updateCount();
+  }
 
 
 }
