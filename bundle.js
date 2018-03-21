@@ -199,8 +199,8 @@ class Deck {
     for (let i = 0; i < 5; i++) {
       this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
     }
-
     this.shuffle();
+    this.count = this.deck.length;
   }
 
   shuffle() {
@@ -216,6 +216,21 @@ class Deck {
       this.deck[currentIndex] = this.deck[randomIndex];
       this.deck[randomIndex] = tempVal;
     }
+  }
+
+  draw() {
+    let n = 3;
+    const drawnCards = [];
+    while (this.count > 0 && n > 0) {
+      drawnCards.push(this.deck.pop());
+      n -= 1;
+      this.updateCount();
+    }
+    return drawnCards;
+  }
+
+  updateCount() {
+    this.count = this.deck.length;
   }
 
 }
