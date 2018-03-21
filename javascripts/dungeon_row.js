@@ -26,6 +26,7 @@ class DungeonRow {
         }
       }
     }
+    this.updateCount();
   }
 
   fillEmpties(arr) {
@@ -35,6 +36,11 @@ class DungeonRow {
       }
     }
     this.updateCount();
+  }
+
+  destroyCard(n) {
+    this.spaces[n][0].destroy();
+    this.clearDestroyed();
   }
 
 

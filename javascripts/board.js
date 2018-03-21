@@ -14,6 +14,12 @@ class Board {
     this.DungeonRow.fillEmpties(newCards);
   }
 
+  popIfDungeonEmpty() {
+    if (this.DungeonRow.count === 1) {
+      this.populateDungeon(3);
+    }
+  }
+
 }
 
 export default Board;

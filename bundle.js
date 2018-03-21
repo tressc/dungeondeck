@@ -74,6 +74,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 document.addEventListener("DOMContentLoaded", () => {
   window.a = new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */];
+  window.a.DungeonRow.destroyCard(2);
 });
 
 
@@ -150,6 +151,7 @@ class DungeonRow {
         }
       }
     }
+    this.updateCount();
   }
 
   fillEmpties(arr) {
@@ -159,6 +161,11 @@ class DungeonRow {
       }
     }
     this.updateCount();
+  }
+
+  destroyCard(n) {
+    this.spaces[n][0].destroy();
+    this.clearDestroyed();
   }
 
 
@@ -257,6 +264,12 @@ class Board {
   populateDungeon(n) {
     const newCards = this.Deck.draw(n);
     this.DungeonRow.fillEmpties(newCards);
+  }
+
+  popIfDungeonEmpty() {
+    if (this.DungeonRow.count === 1) {
+      this.populateDungeon(3);
+    }
   }
 
 }
