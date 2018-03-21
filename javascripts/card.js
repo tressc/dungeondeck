@@ -3,10 +3,15 @@ class Card {
     this.suit = suit;
     this.value = value;
     this.destroyed = false;
+    this.specialValue = 0;
   }
 
   changeValue(change) {
-    this.value = this.value + change;
+    this.value += change;
+  }
+
+  changeSpecial(change) {
+    this.specialValue += change;
   }
 
   destroy() {

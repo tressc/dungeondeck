@@ -90,10 +90,15 @@ class Card {
     this.suit = suit;
     this.value = value;
     this.destroyed = false;
+    this.specialValue = 0;
   }
 
   changeValue(change) {
-    this.value = this.value + change;
+    this.value += change;
+  }
+
+  changeSpecial(change) {
+    this.specialValue += change;
   }
 
   destroy() {
@@ -250,6 +255,8 @@ class Deck {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__deck_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__player_row_js__ = __webpack_require__(7);
+
 
 
 
@@ -259,6 +266,7 @@ class Board {
     this.Deck = new __WEBPACK_IMPORTED_MODULE_0__deck_js__["a" /* default */];
     this.DungeonRow = new __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__["a" /* default */];
     this.populateDungeon(4);
+    this.PlayerRow = new __WEBPACK_IMPORTED_MODULE_2__player_row_js__["a" /* default */];
   }
 
   populateDungeon(n) {
@@ -275,6 +283,29 @@ class Board {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (Board);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(3);
+
+
+class PlayerRow {
+  constructor() {
+    const newPlayer = new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */]("player", 13);
+    this.spaces = [
+      [],
+      [newPlayer],
+      [],
+      []
+    ];
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (PlayerRow);
 
 
 /***/ })

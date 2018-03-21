@@ -1,5 +1,6 @@
 import Deck from './deck.js';
 import DungeonRow from './dungeon_row.js';
+import PlayerRow from './player_row.js';
 
 class Board {
 
@@ -7,6 +8,7 @@ class Board {
     this.Deck = new Deck;
     this.DungeonRow = new DungeonRow;
     this.populateDungeon(4);
+    this.PlayerRow = new PlayerRow;
   }
 
   populateDungeon(n) {
