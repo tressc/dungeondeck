@@ -69,29 +69,33 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cards_card_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rows_dungeon_row_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__deck_js__ = __webpack_require__(5);
+
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  window.Card = __WEBPACK_IMPORTED_MODULE_0__cards_card_js__["a" /* default */];
-  window.DungeonRow = __WEBPACK_IMPORTED_MODULE_1__rows_dungeon_row_js__["a" /* default */];
-
-  window.a = new __WEBPACK_IMPORTED_MODULE_1__rows_dungeon_row_js__["a" /* default */];
-  window.a.spaces[3].push(new __WEBPACK_IMPORTED_MODULE_0__cards_card_js__["a" /* default */](2, 5));
+  window.Card = __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */];
+  window.DungeonRow = __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__["a" /* default */];
+  window.a = new __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__["a" /* default */];
+  window.a.spaces[3].push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](2, 5));
   window.a.updateCount();
+  window.b = new __WEBPACK_IMPORTED_MODULE_2__deck_js__["a" /* default */];
 });
 
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 class Card {
-  constructor(type, value) {
-    this.type = type;
+  constructor(suit, value) {
+    this.suit = suit;
     this.value = value;
     this.destroyed = false;
   }
@@ -103,13 +107,27 @@ class Card {
   destroy() {
     this.destroyed = true;
   }
+
 }
+
+Card.suits = [
+  "shields",
+  "swords",
+  "coins",
+  "potions",
+  "monsters",
+  "magic"
+];
+
+Card.values = [
+  2, 3, 4, 5, 6, 7, 8, 9, 10
+];
 
 /* harmony default export */ __webpack_exports__["a"] = (Card);
 
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -143,9 +161,66 @@ class DungeonRow {
     }
   }
 
+
+
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (DungeonRow);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(3);
+
+
+class Deck {
+
+  constructor() {
+    this.deck = [];
+    for (let i = 0; i < 2; i++) {
+      for (let j = 0; j < 6; j++) {
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
+      }
+    }
+    for (let i = 2; i < 4; i++) {
+      for (let j = 0; j < 9; j++) {
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
+      }
+    }
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 2; j++) {
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[i]));
+      }
+    }
+    this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
+    for (let i = 0; i < 5; i++) {
+      this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
+    }
+
+    this.shuffle();
+  }
+
+  shuffle() {
+    let currentIndex = this.deck.length;
+    let tempVal;
+    let randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      tempVal = this.deck[currentIndex];
+      this.deck[currentIndex] = this.deck[randomIndex];
+      this.deck[randomIndex] = tempVal;
+    }
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Deck);
 
 
 /***/ })
