@@ -450,6 +450,16 @@ class View {
       const pos = $(event.currentTarget).data("pos");
       const card = this.board.DungeonRow.spaces[pos][0];
       this.board.burnCard(card);
+      this.board.popIfDungeonEmpty();
+      const $lis = $('.drow ul')[0].childNodes;
+      for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+        let text = "";
+        if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
+          text = this.board.DungeonRow.spaces[rowIdx][0].suit;
+        }
+        $($lis[rowIdx]).text(text);
+      }
+      console.log(this.board.DungeonRow);
     }));
   }
 }
