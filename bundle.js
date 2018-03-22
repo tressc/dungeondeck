@@ -90,6 +90,7 @@ class Card {
     this.value = value;
     this.destroyed = false;
     this.specialValue = 0;
+    this.tempDestroyed = false;
   }
 
   updateValue(change) {
@@ -279,6 +280,8 @@ class Board {
   popIfDungeonEmpty() {
     if (this.DungeonRow.count === 1) {
       this.populateDungeon(3);
+      this.PlayerRow.destroyTemps();
+      this.clearAllDestroyed();
     }
   }
 
@@ -330,6 +333,16 @@ class PlayerRow {
       }
     }
   }
+
+  destroyTemps() {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length) {
+        if (this.spaces[i][0].tempDestroyed) {
+          this.spaces[i][0].destroyed = true;
+        }
+      }
+    }
+  }
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (PlayerRow);
@@ -347,7 +360,7 @@ class Fire {
 
   melt(card) {
     card.destroy();
-    if (["potions", "shield", "sword"].includes(card.suit)) {
+    if (["potions", "shields", "swords"].includes(card.suit)) {
       return card.value;
     } else {
       return 0;

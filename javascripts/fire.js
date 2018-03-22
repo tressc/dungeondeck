@@ -5,7 +5,7 @@ class Fire {
 
   melt(card) {
     card.destroy();
-    if (["potions", "shield", "sword"].includes(card.suit)) {
+    if (["potions", "shields", "swords"].includes(card.suit)) {
       return card.value;
     } else {
       return 0;

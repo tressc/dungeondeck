@@ -21,6 +21,8 @@ class Board {
   popIfDungeonEmpty() {
     if (this.DungeonRow.count === 1) {
       this.populateDungeon(3);
+      this.PlayerRow.destroyTemps();
+      this.clearAllDestroyed();
     }
   }
 

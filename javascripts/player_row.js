@@ -24,6 +24,16 @@ class PlayerRow {
       }
     }
   }
+
+  destroyTemps() {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length) {
+        if (this.spaces[i][0].tempDestroyed) {
+          this.spaces[i][0].destroyed = true;
+        }
+      }
+    }
+  }
 }
 
 export default PlayerRow;

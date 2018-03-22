@@ -4,6 +4,7 @@ class Card {
     this.value = value;
     this.destroyed = false;
     this.specialValue = 0;
+    this.tempDestroyed = false;
   }
 
   updateValue(change) {
