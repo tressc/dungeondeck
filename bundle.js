@@ -418,7 +418,7 @@ class View {
     $deck.addClass("deck");
     $deck.text(this.board.Deck.count);
 
-    const $row = $("<ul>");
+    const $row1 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
       let $space = $("<li>");
       $space.data("pos", rowIdx);
@@ -427,17 +427,34 @@ class View {
       } else {
         $space.text("");
       }
-      $row.append($space);
+      $row1.append($space);
+    }
+
+    const $row2 = $("<ul>");
+    for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+      let $space = $("<li>");
+      $space.data("pos", rowIdx);
+      if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
+        $space.text(this.board.PlayerRow.spaces[rowIdx][0].specialValue);
+      } else {
+        $space.text("");
+      }
+      $row2.append($space);
     }
 
 
     const $drow = $("<div>");
     $drow.addClass("drow");
-    $drow.append($row);
+    $drow.append($row1);
+
+    const $prow = $("<div>");
+    $prow.addClass("prow");
+    $prow.append($row2);
 
 
     this.$root.append($deck);
     this.$root.append($drow);
+    this.$root.append($prow);
   }
 
   bindEvents() {
@@ -459,7 +476,9 @@ class View {
         }
         $($lis[rowIdx]).text(text);
       }
-      console.log(this.board.DungeonRow);
+      $('.deck').text(this.board.Deck.count);
+      let value = this.board.PlayerRow.spaces[1][0].specialValue;
+      $($('.prow')[0].childNodes[0].childNodes[1]).text(value);
     }));
   }
 }
