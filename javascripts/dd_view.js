@@ -16,6 +16,7 @@ class View {
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
       let $space = $("<li>");
       $space.data("pos", rowIdx);
+      $space.data("loc", "dungeon");
       if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
         $space.text(this.board.DungeonRow.spaces[rowIdx][0].suit);
       } else {
@@ -28,6 +29,7 @@ class View {
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
       let $space = $("<li>");
       $space.data("pos", rowIdx);
+      $space.data("loc", "player");
       if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
         $space.text(this.board.PlayerRow.spaces[rowIdx][0].specialValue);
       } else {
@@ -57,8 +59,9 @@ class View {
       $(event.currentTarget).text(this.board.Deck.count);
     }));
 
-    this.$root.on("click", "li", (event => {
+    this.$root.on("click", ".drow li", (event => {
       const pos = $(event.currentTarget).data("pos");
+      console.log($(event.currentTarget).data("loc"));
       const card = this.board.DungeonRow.spaces[pos][0];
       this.board.burnCard(card);
       this.board.popIfDungeonEmpty();
