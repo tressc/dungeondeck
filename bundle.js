@@ -60,27 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(6);
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  window.a = new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */];
-});
-
-
-/***/ }),
-/* 1 */,
-/* 2 */,
-/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -124,139 +108,32 @@ Card.values = [
 
 
 /***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class DungeonRow {
-  constructor() {
-    this.spaces = [
-      [],
-      [],
-      [],
-      []
-    ];
-
-    this.count = 0;
-  }
-
-  updateCount() {
-    let count = 0;
-    for (let i = 0; i < 4; i++) {
-      count += this.spaces[i].length;
-    }
-    this.count = count;
-  }
-
-  clearDestroyed() {
-    for (let i = 0; i < 4; i++) {
-      if (this.spaces[i].length) {
-        if (this.spaces[i][0].destroyed) {
-          this.spaces[i].pop();
-        }
-      }
-    }
-    this.updateCount();
-  }
-
-  fillEmpties(arr) {
-    for (let i = 0; i < 4; i++) {
-      if (this.spaces[i].length === 0 && arr.length > 0) {
-        this.spaces[i].push(arr.pop());
-      }
-    }
-    this.updateCount();
-  }
-
-  destroyCard(n) {
-    this.spaces[n][0].destroy();
-    this.clearDestroyed();
-  }
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dd_view_js__ = __webpack_require__(7);
 
 
-}
 
-/* harmony default export */ __webpack_exports__["a"] = (DungeonRow);
+document.addEventListener("DOMContentLoaded", () => {
+  const root = $('.dd');
+  window.a = new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */];
+  new __WEBPACK_IMPORTED_MODULE_1__dd_view_js__["a" /* default */](window.a, root);
+});
 
 
 /***/ }),
-/* 5 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(3);
-
-
-class Deck {
-
-  constructor() {
-    this.deck = [];
-    for (let i = 0; i < 2; i++) {
-      for (let j = 0; j < 6; j++) {
-        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
-      }
-    }
-    for (let i = 2; i < 4; i++) {
-      for (let j = 0; j < 9; j++) {
-        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
-      }
-    }
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 2; j++) {
-        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[i]));
-      }
-    }
-    this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
-    for (let i = 0; i < 5; i++) {
-      this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
-    }
-    this.shuffle();
-    this.count = this.deck.length;
-  }
-
-  shuffle() {
-    let currentIndex = this.deck.length;
-    let tempVal;
-    let randomIndex;
-
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      tempVal = this.deck[currentIndex];
-      this.deck[currentIndex] = this.deck[randomIndex];
-      this.deck[randomIndex] = tempVal;
-    }
-  }
-
-  draw(n) {
-    const drawnCards = [];
-    while (this.count > 0 && n > 0) {
-      drawnCards.push(this.deck.pop());
-      n -= 1;
-      this.updateCount();
-    }
-    return drawnCards;
-  }
-
-  updateCount() {
-    this.count = this.deck.length;
-  }
-
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Deck);
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__deck_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__deck_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__player_row_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fire_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__player_row_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fire_js__ = __webpack_require__(6);
 
 
 
@@ -328,11 +205,136 @@ class Board {
 
 
 /***/ }),
-/* 7 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(0);
+
+
+class Deck {
+
+  constructor() {
+    this.deck = [];
+    for (let i = 0; i < 2; i++) {
+      for (let j = 0; j < 6; j++) {
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
+      }
+    }
+    for (let i = 2; i < 4; i++) {
+      for (let j = 0; j < 9; j++) {
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
+      }
+    }
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 2; j++) {
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[i]));
+      }
+    }
+    this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
+    for (let i = 0; i < 5; i++) {
+      this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
+    }
+    this.shuffle();
+    this.count = this.deck.length;
+  }
+
+  shuffle() {
+    let currentIndex = this.deck.length;
+    let tempVal;
+    let randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      tempVal = this.deck[currentIndex];
+      this.deck[currentIndex] = this.deck[randomIndex];
+      this.deck[randomIndex] = tempVal;
+    }
+  }
+
+  draw(n) {
+    const drawnCards = [];
+    while (this.count > 0 && n > 0) {
+      drawnCards.push(this.deck.pop());
+      n -= 1;
+      this.updateCount();
+    }
+    return drawnCards;
+  }
+
+  updateCount() {
+    this.count = this.deck.length;
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Deck);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class DungeonRow {
+  constructor() {
+    this.spaces = [
+      [],
+      [],
+      [],
+      []
+    ];
+
+    this.count = 0;
+  }
+
+  updateCount() {
+    let count = 0;
+    for (let i = 0; i < 4; i++) {
+      count += this.spaces[i].length;
+    }
+    this.count = count;
+  }
+
+  clearDestroyed() {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length) {
+        if (this.spaces[i][0].destroyed) {
+          this.spaces[i].pop();
+        }
+      }
+    }
+    this.updateCount();
+  }
+
+  fillEmpties(arr) {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length === 0 && arr.length > 0) {
+        this.spaces[i].push(arr.pop());
+      }
+    }
+    this.updateCount();
+  }
+
+  destroyCard(n) {
+    this.spaces[n][0].destroy();
+    this.clearDestroyed();
+  }
+
+
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (DungeonRow);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(0);
 
 
 class PlayerRow {
@@ -375,7 +377,7 @@ class PlayerRow {
 
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -395,6 +397,30 @@ class Fire {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (Fire);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class View {
+  constructor(board, $root) {
+    this.board = board;
+    this.$root = $root;
+
+    this.setupBoard();
+  }
+
+  setupBoard() {
+    const $div = $("<div>");
+    $div.addClass("deck");
+    $div.text(this.board.Deck.count);
+    this.$root.append($div);
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (View);
 
 
 /***/ })
