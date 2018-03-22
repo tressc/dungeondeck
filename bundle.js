@@ -270,6 +270,7 @@ class Board {
     this.populateDungeon(4);
     this.PlayerRow = new __WEBPACK_IMPORTED_MODULE_2__player_row_js__["a" /* default */];
     this.Fire = new __WEBPACK_IMPORTED_MODULE_3__fire_js__["a" /* default */];
+    this.moveBuffer = null;
   }
 
   populateDungeon(n) {
@@ -285,7 +286,7 @@ class Board {
     }
   }
 
-  burnCard(card) {
+  burnCard(card = this.moveBuffer) {
     const meltValue = this.Fire.melt(card);
     this.PlayerRow.player().updateSpecial(meltValue);
     this.clearAllDestroyed();
@@ -294,6 +295,31 @@ class Board {
   clearAllDestroyed() {
     this.DungeonRow.clearDestroyed();
     this.PlayerRow.clearDestroyed();
+  }
+
+  // this should really be select location (which may contain a card)
+  selectCard(card) {
+    if (!this.moveBuffer) {
+      this.moveBuffer = card;
+    } else if (this.legalMove(this.moveBuffer, card)){
+      this.resolveAction(this.moveBuffer, card);
+    }
+  }
+
+  resolveAction(card, target) {
+    if (target.suit === "player") {
+      if (card.suit === "monsters") {
+        target.updateValue(card.value * -1);
+      } else if (card.suit === "potions") {
+        target.updateValue(card.value);
+      }
+    } else if (target.suit === "monsters") {
+      target.updateValue(card.value * -1);
+    }
+  }
+
+  // this is going to require the card's location!
+  legalMove(card, target) {
   }
 
 }
