@@ -6,11 +6,11 @@ class Card {
     this.specialValue = 0;
   }
 
-  changeValue(change) {
+  updateValue(change) {
     this.value += change;
   }
 
-  changeSpecial(change) {
+  updateSpecial(change) {
     this.specialValue += change;
   }
 

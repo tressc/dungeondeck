@@ -1,6 +1,7 @@
 import Deck from './deck.js';
 import DungeonRow from './dungeon_row.js';
 import PlayerRow from './player_row.js';
+import Fire from './fire.js';
 
 class Board {
 
@@ -9,6 +10,7 @@ class Board {
     this.DungeonRow = new DungeonRow;
     this.populateDungeon(4);
     this.PlayerRow = new PlayerRow;
+    this.Fire = new Fire;
   }
 
   populateDungeon(n) {
@@ -20,6 +22,17 @@ class Board {
     if (this.DungeonRow.count === 1) {
       this.populateDungeon(3);
     }
+  }
+
+  burnCard(card) {
+    const meltValue = this.Fire.melt(card);
+    this.PlayerRow.player().updateSpecial(meltValue);
+    this.clearAllDestroyed();
+  }
+
+  clearAllDestroyed() {
+    this.DungeonRow.clearDestroyed();
+    this.PlayerRow.clearDestroyed();
   }
 
 }

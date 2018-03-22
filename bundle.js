@@ -74,7 +74,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 document.addEventListener("DOMContentLoaded", () => {
   window.a = new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */];
-  window.a.DungeonRow.destroyCard(2);
 });
 
 
@@ -93,11 +92,11 @@ class Card {
     this.specialValue = 0;
   }
 
-  changeValue(change) {
+  updateValue(change) {
     this.value += change;
   }
 
-  changeSpecial(change) {
+  updateSpecial(change) {
     this.specialValue += change;
   }
 
@@ -256,6 +255,8 @@ class Deck {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__deck_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__player_row_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fire_js__ = __webpack_require__(8);
+
 
 
 
@@ -267,6 +268,7 @@ class Board {
     this.DungeonRow = new __WEBPACK_IMPORTED_MODULE_1__dungeon_row_js__["a" /* default */];
     this.populateDungeon(4);
     this.PlayerRow = new __WEBPACK_IMPORTED_MODULE_2__player_row_js__["a" /* default */];
+    this.Fire = new __WEBPACK_IMPORTED_MODULE_3__fire_js__["a" /* default */];
   }
 
   populateDungeon(n) {
@@ -278,6 +280,17 @@ class Board {
     if (this.DungeonRow.count === 1) {
       this.populateDungeon(3);
     }
+  }
+
+  burnCard(card) {
+    const meltValue = this.Fire.melt(card);
+    this.PlayerRow.player().updateSpecial(meltValue);
+    this.clearAllDestroyed();
+  }
+
+  clearAllDestroyed() {
+    this.DungeonRow.clearDestroyed();
+    this.PlayerRow.clearDestroyed();
   }
 
 }
@@ -303,9 +316,46 @@ class PlayerRow {
       []
     ];
   }
+
+  player() {
+    return this.spaces[1][0];
+  }
+
+  clearDestroyed() {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length) {
+        if (this.spaces[i][0].destroyed) {
+          this.spaces[i].pop();
+        }
+      }
+    }
+  }
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (PlayerRow);
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Fire {
+
+  constructor() {
+  }
+
+  melt(card) {
+    card.destroy();
+    if (["potions", "shield", "sword"].includes(card.suit)) {
+      return card.value;
+    } else {
+      return 0;
+    }
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Fire);
 
 
 /***/ })
