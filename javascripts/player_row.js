@@ -4,15 +4,15 @@ class PlayerRow {
   constructor() {
     const newPlayer = new Card("player", 13);
     this.spaces = [
-      [],
       [newPlayer],
+      [],
       [],
       []
     ];
   }
 
   player() {
-    return this.spaces[1][0];
+    return this.spaces[0][0];
   }
 
   clearDestroyed() {

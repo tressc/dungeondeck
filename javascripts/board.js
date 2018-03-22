@@ -60,7 +60,42 @@ class Board {
   }
 
   // this is going to require the card's location!
-  legalMove(card, target) {
+  legalMove(target) {
+    const bCard = this.moveBuffer.card;
+    const bLoc = this.moveBuffer.location;
+    const tCard = target.card;
+    const tLoc = target.location;
+
+    if (bLoc.row === "dungeon") {
+      if (bCard.suit !== "monsters") {
+        if (tLoc.row === "fire") {
+          return true;
+        } else if (tLoc.row === "player") {
+          if (this.PlayerRow[tLoc.idx].length === 0) {
+            return true;
+          }
+        }
+      } else if (bCard.suit === "monsters") {
+        if (tCard.suit === "player") {
+          return true;
+        } if (tLoc.row === "player") {
+          if (tCard.suit === "shields") {
+            return true;
+          }
+        }
+      }
+    } else if (bLoc.row === "player") {
+      if (bCard.suit === "swords") {
+        if (tCard.suit === "monsters") {
+          return true;
+        }
+      } else if (bCard.suit === "potions" || bCard.suit === "coins") {
+        if (tCard.suit === "player") {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
 }

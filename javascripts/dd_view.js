@@ -74,8 +74,8 @@ class View {
         $($lis[rowIdx]).text(text);
       }
       $('.deck').text(this.board.Deck.count);
-      let value = this.board.PlayerRow.spaces[1][0].specialValue;
-      $($('.prow')[0].childNodes[0].childNodes[1]).text(value);
+      let value = this.board.PlayerRow.spaces[0][0].specialValue;
+      $($('.prow')[0].childNodes[0].childNodes[0]).text(value);
     }));
   }
 }

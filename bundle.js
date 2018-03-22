@@ -196,7 +196,42 @@ class Board {
   }
 
   // this is going to require the card's location!
-  legalMove(card, target) {
+  legalMove(target) {
+    const bCard = this.moveBuffer.card;
+    const bLoc = this.moveBuffer.location;
+    const tCard = target.card;
+    const tLoc = target.location;
+
+    if (bLoc.row === "dungeon") {
+      if (bCard.suit !== "monsters") {
+        if (tLoc.row === "fire") {
+          return true;
+        } else if (tLoc.row === "player") {
+          if (this.PlayerRow[tLoc.idx].length === 0) {
+            return true;
+          }
+        }
+      } else if (bCard.suit === "monsters") {
+        if (tCard.suit === "player") {
+          return true;
+        } if (tLoc.row === "player") {
+          if (tCard.suit === "shields") {
+            return true;
+          }
+        }
+      }
+    } else if (bLoc.row === "player") {
+      if (bCard.suit === "swords") {
+        if (tCard.suit === "monsters") {
+          return true;
+        }
+      } else if (bCard.suit === "potions" || bCard.suit === "coins") {
+        if (tCard.suit === "player") {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
 }
@@ -341,15 +376,15 @@ class PlayerRow {
   constructor() {
     const newPlayer = new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */]("player", 13);
     this.spaces = [
-      [],
       [newPlayer],
+      [],
       [],
       []
     ];
   }
 
   player() {
-    return this.spaces[1][0];
+    return this.spaces[0][0];
   }
 
   clearDestroyed() {
@@ -480,8 +515,8 @@ class View {
         $($lis[rowIdx]).text(text);
       }
       $('.deck').text(this.board.Deck.count);
-      let value = this.board.PlayerRow.spaces[1][0].specialValue;
-      $($('.prow')[0].childNodes[0].childNodes[1]).text(value);
+      let value = this.board.PlayerRow.spaces[0][0].specialValue;
+      $($('.prow')[0].childNodes[0].childNodes[0]).text(value);
     }));
   }
 }
