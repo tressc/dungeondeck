@@ -212,7 +212,9 @@ class Board {
           }
         }
       }
-    } else
+    } else if (bLoc.row === "dungeon"){
+      return;
+    }
     this.moveBuffer = null;
     this.clearAllDestroyed();
     this.popIfDungeonEmpty();
