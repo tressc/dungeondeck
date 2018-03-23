@@ -39,9 +39,11 @@ class View {
       $space.data("pos", rowIdx);
       $space.data("loc", "player");
       if (rowIdx === 0) {
-        let health = this.board.PlayerRow.spaces[rowIdx][0].value + " / 13";
-        let score = this.board.PlayerRow.spaces[rowIdx][0].specialValue;
-        $space.text("health: " + health + "  score: " + score);
+        if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
+          let health = this.board.PlayerRow.spaces[rowIdx][0].value + " / 13";
+          let score = this.board.PlayerRow.spaces[rowIdx][0].specialValue;
+          $space.text("health: " + health + "  score: " + score);
+        }
       } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
         let value = this.board.PlayerRow.spaces[rowIdx][0].value;
         let suit = this.board.PlayerRow.spaces[rowIdx][0].suit;
@@ -61,11 +63,26 @@ class View {
     $prow.addClass("prow");
     $prow.append($row2);
 
+    const $youLose = $("<div>");
+    $youLose.addClass("you-lose");
+    $youLose.text("you lose!");
 
-    this.$root.append($deck);
-    this.$root.append($fire);
-    this.$root.append($drow);
-    this.$root.append($prow);
+    const $youWin = $("<div>");
+    $youLose.addClass("you-win");
+    $youLose.text("you win!");
+
+    if (this.board.PlayerRow.spaces[0].length === 0) {
+      this.$root.append($youLose);
+    } else if (this.board.Deck.count === 0) {
+      if (this.board.DungeonRow.empty) {
+        this.$root.append($youWin);
+      }
+    } else {
+      this.$root.append($deck);
+      this.$root.append($fire);
+      this.$root.append($drow);
+      this.$root.append($prow);
+    }
   }
 
   bindEvents() {

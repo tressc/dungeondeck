@@ -21,7 +21,7 @@ class Deck {
     }
     this.deck.push(new Card(Card.suits[4], Card.values[8]));
     for (let i = 0; i < 5; i++) {
-      this.deck.push(new Card(Card.suits[5], Card.values[8]));
+      this.deck.push(new Card(Card.suits[5], Card.values[3]));
     }
     this.shuffle();
     this.count = this.deck.length;

@@ -11,3 +11,13 @@ li {
   user-select: none;
   color: red;
 }
+
+.you-lose {
+  color: red;
+  font-size: 50px;
+}
+
+.you-win {
+  color: green;
+  font-size: 50px;
+}

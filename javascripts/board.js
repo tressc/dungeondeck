@@ -95,6 +95,25 @@ class Board {
         let card = this.DungeonRow.spaces[bLoc.idx].pop();
         this.PlayerRow.spaces[tLoc.idx].push(card);
       }
+    } else if (bLoc.row === "player") {
+      if (bCard.suit === "potions") {
+        bCard.destroy();
+        const player = this.PlayerRow.player();
+        player.updateValue(bCard.value);
+        if (player.value > 13) {
+          player.value = 13;
+        }
+      } else if (bCard.suit === "coins") {
+        bCard.destroy();
+        const player = this.PlayerRow.player();
+        player.updateSpecial(bCard.value);
+      } else if (bCard.suit === "swords") {
+        bCard.destroy();
+        tCard.updateValue(bCard.value * -1);
+        if (tCard.value < 1) {
+          tCard.destroy();
+        }
+      }
     }
     this.moveBuffer = null;
     this.clearAllDestroyed();
