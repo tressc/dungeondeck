@@ -111,7 +111,7 @@ class Board {
       }
     } else if (bLoc.row === "player") {
       if (bCard.suit === "potions") {
-        bCard.destroy();
+        bCard.freeze();
         const player = this.PlayerRow.player();
         player.updateValue(bCard.value);
         if (player.value > 13) {

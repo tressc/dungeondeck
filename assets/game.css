@@ -45,4 +45,8 @@ li {
   width: 100px;
   height: 150px;
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
