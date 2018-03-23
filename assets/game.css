@@ -21,3 +21,7 @@ li {
   color: green;
   font-size: 50px;
 }
+
+.selected {
+  color: green;
+}

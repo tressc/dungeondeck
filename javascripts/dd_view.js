@@ -24,8 +24,12 @@ class View {
       $space.data("pos", rowIdx);
       $space.data("loc", "dungeon");
       if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
-        let value = this.board.DungeonRow.spaces[rowIdx][0].value;
-        let suit = this.board.DungeonRow.spaces[rowIdx][0].suit;
+        let card = this.board.DungeonRow.spaces[rowIdx][0];
+        let value = card.value;
+        let suit = card.suit;
+        if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
+          $space.addClass("selected");
+        }
         $space.text(value + " of " + suit);
       } else {
         $space.text("");
@@ -45,8 +49,12 @@ class View {
           $space.text("health: " + health + "  score: " + score);
         }
       } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
-        let value = this.board.PlayerRow.spaces[rowIdx][0].value;
-        let suit = this.board.PlayerRow.spaces[rowIdx][0].suit;
+        let card = this.board.PlayerRow.spaces[rowIdx][0];
+        let value = card.value;
+        let suit = card.suit;
+        if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
+          $space.addClass("selected");
+        }
         $space.text(value + " of " + suit);
       } else {
         $space.text("");
@@ -106,7 +114,6 @@ class View {
       this.board.selectTarget(
         {location: {row: location, idx: idx}, card: card}
       );
-      console.log(this.board.moveBuffer);
       this.$root.empty();
       this.setupBoard();
     }));
