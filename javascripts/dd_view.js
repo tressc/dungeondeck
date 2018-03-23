@@ -12,6 +12,12 @@ class View {
     $deck.addClass("deck");
     $deck.text(this.board.Deck.count);
 
+    const $fire = $("<li>");
+    $fire.addClass("fire");
+    $fire.text("fire");
+    $fire.data("pos", null);
+    $fire.data("loc", "fire");
+
     const $row1 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
       let $space = $("<li>");
@@ -57,6 +63,7 @@ class View {
 
 
     this.$root.append($deck);
+    this.$root.append($fire);
     this.$root.append($drow);
     this.$root.append($prow);
   }
@@ -71,11 +78,13 @@ class View {
         if (this.board.DungeonRow.spaces[idx].length > 0) {
           card = this.board.DungeonRow.spaces[idx][0];
         }
-      } else {
+      } else if ($(event.currentTarget).data("loc") === "player") {
         location = "player";
         if (this.board.PlayerRow.spaces[idx].length > 0) {
           card = this.board.PlayerRow.spaces[idx][0];
         }
+      } else if ($(event.currentTarget).data("loc") === "fire") {
+        location = "fire";
       }
       this.board.selectTarget(
         {location: {row: location, idx: idx}, card: card}

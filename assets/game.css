@@ -2,3 +2,12 @@ div {
   user-select: none;
   color: blue;
 }
+
+li {
+  /*list-style: none;*/
+}
+
+.fire {
+  user-select: none;
+  color: red;
+}

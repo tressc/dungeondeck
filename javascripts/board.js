@@ -85,7 +85,13 @@ class Board {
         }
       }
     } else if (bLoc.row === "dungeon"){
-      if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
+      if (tLoc.row === "fire") {
+        bCard.destroy();
+        if (bCard.suit !== "coins" && bCard.suit !== "magic") {
+          const player = this.PlayerRow.player();
+          player.updateSpecial(bCard.value);
+        }
+      } else if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
         let card = this.DungeonRow.spaces[bLoc.idx].pop();
         this.PlayerRow.spaces[tLoc.idx].push(card);
       }
