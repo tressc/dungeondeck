@@ -417,6 +417,14 @@ class DungeonRow {
     this.clearDestroyed();
   }
 
+  empty() {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length === 1) {
+        return false;
+      }
+    }
+    return true;
+  }
 
 }
 
@@ -576,15 +584,13 @@ class View {
     $youLose.text("you lose!");
 
     const $youWin = $("<div>");
-    $youLose.addClass("you-win");
-    $youLose.text("you win!");
+    $youWin.addClass("you-win");
+    $youWin.text("you win!");
 
     if (this.board.PlayerRow.spaces[0].length === 0) {
       this.$root.append($youLose);
-    } else if (this.board.Deck.count === 0) {
-      if (this.board.DungeonRow.empty) {
+    } else if (this.board.Deck.count === 0 && this.board.DungeonRow.empty()) {
         this.$root.append($youWin);
-      }
     } else {
       this.$root.append($deck);
       this.$root.append($fire);
@@ -617,13 +623,16 @@ class View {
       this.$root.empty();
       this.setupBoard();
     }));
+    this.$root.on("click", ".deck", (event => {
+      this.board.Deck.draw(3);
+      this.$root.empty();
+      this.setupBoard();
+      // console.log(this.board);
+      // $(event.currentTarget).text(this.board.Deck.count);
+    }));
   }
 
   // bindEvents() {
-  //   this.$root.on("click", ".deck", (event => {
-  //     console.log(this.board.Deck.draw(3));
-  //     $(event.currentTarget).text(this.board.Deck.count);
-  //   }));
   //
   //   this.$root.on("click", ".drow li", (event => {
   //     const pos = $(event.currentTarget).data("pos");

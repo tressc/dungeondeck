@@ -43,6 +43,14 @@ class DungeonRow {
     this.clearDestroyed();
   }
 
+  empty() {
+    for (let i = 0; i < 4; i++) {
+      if (this.spaces[i].length === 1) {
+        return false;
+      }
+    }
+    return true;
+  }
 
 }
 
