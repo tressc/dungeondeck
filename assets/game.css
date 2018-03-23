@@ -4,7 +4,7 @@ div {
 }
 
 li {
-  /*list-style: none;*/
+  list-style: none;
 }
 
 .fire {
@@ -23,9 +23,26 @@ li {
 }
 
 .selected {
-  color: green;
+  outline: solid;
+  outline-color: limegreen;
 }
 
-.frozen {
+.frozen div {
   color: gray;
+}
+
+.drow ul{
+  display: flex;
+  justify-content: space-around;
+}
+
+.prow ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-slot {
+  width: 100px;
+  height: 150px;
+  border: 1px solid black;
 }

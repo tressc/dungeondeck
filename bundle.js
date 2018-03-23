@@ -105,7 +105,7 @@ Card.suits = [
 ];
 
 Card.values = [
-  2, 3, 4, 5, 6, 7, 8, 9, 10
+  2, 3, 4, 5, 6, 7, 8, 9, 10, "cloak"
 ];
 
 /* harmony default export */ __webpack_exports__["a"] = (Card);
@@ -355,7 +355,7 @@ class Deck {
     }
     this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
     for (let i = 0; i < 5; i++) {
-      this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[3]));
+      this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[9]));
     }
     this.shuffle();
     this.count = this.deck.length;
@@ -556,6 +556,8 @@ class View {
 
     const $row1 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+      let $cardSlot = $("<div>");
+      $cardSlot.addClass("card-slot");
       let $space = $("<li>");
       $space.data("pos", rowIdx);
       $space.data("loc", "dungeon");
@@ -566,15 +568,18 @@ class View {
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
-        $space.text(value + " of " + suit);
+        $cardSlot.text(value + " of " + suit);
+        $space.append($cardSlot);
       } else {
-        $space.text("");
+        $space.append($cardSlot);
       }
       $row1.append($space);
     }
 
     const $row2 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+      let $cardSlot = $("<div>");
+      $cardSlot.addClass("card-slot");
       let $space = $("<li>");
       $space.data("pos", rowIdx);
       $space.data("loc", "player");
@@ -582,7 +587,8 @@ class View {
         if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
           let health = this.board.PlayerRow.spaces[rowIdx][0].value + " / 13";
           let score = this.board.PlayerRow.spaces[rowIdx][0].specialValue;
-          $space.text("health: " + health + "  score: " + score);
+          $cardSlot.text("health: " + health + "  score: " + score);
+          $space.append($cardSlot);
         }
       } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
         let card = this.board.PlayerRow.spaces[rowIdx][0];
@@ -594,9 +600,10 @@ class View {
         if (card.frozen) {
           $space.addClass("frozen");
         }
-        $space.text(value + " of " + suit);
+        $cardSlot.text(value + " of " + suit);
+        $space.append($cardSlot);
       } else {
-        $space.text("");
+        $space.append($cardSlot);
       }
       $row2.append($space);
     }
