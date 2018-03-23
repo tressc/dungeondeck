@@ -74,6 +74,9 @@ class Board {
           }
         }
       }
+      this.moveBuffer = null;
+      this.clearAllDestroyed();
+      this.popIfDungeonEmpty();
     }
   }
 
@@ -82,13 +85,13 @@ class Board {
     const bLoc = this.moveBuffer.location;
     const tCard = target.card;
     const tLoc = target.location;
-
+    const tIdx = target.index;
     if (bLoc.row === "dungeon") {
       if (bCard.suit !== "monsters") {
         if (tLoc.row === "fire") {
           return true;
         } else if (tLoc.row === "player") {
-          if (this.PlayerRow[tLoc.idx].length === 0) {
+          if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
             return true;
           }
         }

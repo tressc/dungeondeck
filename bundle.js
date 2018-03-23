@@ -209,6 +209,9 @@ class Board {
           }
         }
       }
+      this.moveBuffer = null;
+      this.clearAllDestroyed();
+      this.popIfDungeonEmpty();
     }
   }
 
@@ -217,13 +220,13 @@ class Board {
     const bLoc = this.moveBuffer.location;
     const tCard = target.card;
     const tLoc = target.location;
-
+    const tIdx = target.index;
     if (bLoc.row === "dungeon") {
       if (bCard.suit !== "monsters") {
         if (tLoc.row === "fire") {
           return true;
         } else if (tLoc.row === "player") {
-          if (this.PlayerRow[tLoc.idx].length === 0) {
+          if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
             return true;
           }
         }
@@ -512,20 +515,26 @@ class View {
 
   bindEvents() {
     this.$root.on("click", "li", (event => {
-      let location = "";
+      let location;
       let card = null;
       let idx = $(event.currentTarget).data("pos");
       if ($(event.currentTarget).data("loc") === "dungeon") {
+        location = "dungeon";
         if (this.board.DungeonRow.spaces[idx].length > 0) {
           card = this.board.DungeonRow.spaces[idx][0];
         }
       } else {
+        location = "player";
         if (this.board.PlayerRow.spaces[idx].length > 0) {
           card = this.board.PlayerRow.spaces[idx][0];
         }
       }
-
-
+      this.board.selectTarget(
+        {location: {row: location, idx: idx}, card: card}
+      );
+      console.log(this.board.moveBuffer);
+      this.$root.empty();
+      this.setupBoard();
     }));
   }
 
