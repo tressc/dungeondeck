@@ -39,7 +39,14 @@ class Board {
   }
 
   selectTarget(target) {
-    if (target.card === null) return;
+    if (!this.moveBuffer) {
+      if (target.card === null) {
+        return;
+      } else if (target.card.suit === "player") {
+        return;
+      }
+    }
+
     if (!this.moveBuffer) {
       this.moveBuffer = target;
     } else if (target.card === this.moveBuffer.card) {
@@ -78,7 +85,10 @@ class Board {
         }
       }
     } else if (bLoc.row === "dungeon"){
-      return;
+      if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
+        let card = this.DungeonRow.spaces[bLoc.idx].pop();
+        this.PlayerRow.spaces[tLoc.idx].push(card);
+      }
     }
     this.moveBuffer = null;
     this.clearAllDestroyed();

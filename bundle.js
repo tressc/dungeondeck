@@ -174,7 +174,14 @@ class Board {
   }
 
   selectTarget(target) {
-    if (target.card === null) return;
+    if (!this.moveBuffer) {
+      if (target.card === null) {
+        return;
+      } else if (target.card.suit === "player") {
+        return;
+      }
+    }
+
     if (!this.moveBuffer) {
       this.moveBuffer = target;
     } else if (target.card === this.moveBuffer.card) {
@@ -213,7 +220,10 @@ class Board {
         }
       }
     } else if (bLoc.row === "dungeon"){
-      return;
+      if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
+        let card = this.DungeonRow.spaces[bLoc.idx].pop();
+        this.PlayerRow.spaces[tLoc.idx].push(card);
+      }
     }
     this.moveBuffer = null;
     this.clearAllDestroyed();
@@ -483,7 +493,9 @@ class View {
       $space.data("pos", rowIdx);
       $space.data("loc", "dungeon");
       if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
-        $space.text(this.board.DungeonRow.spaces[rowIdx][0].suit);
+        let value = this.board.DungeonRow.spaces[rowIdx][0].value;
+        let suit = this.board.DungeonRow.spaces[rowIdx][0].suit;
+        $space.text(value + " of " + suit);
       } else {
         $space.text("");
       }
@@ -495,8 +507,14 @@ class View {
       let $space = $("<li>");
       $space.data("pos", rowIdx);
       $space.data("loc", "player");
-      if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
-        $space.text(this.board.PlayerRow.spaces[rowIdx][0].specialValue);
+      if (rowIdx === 0) {
+        let health = this.board.PlayerRow.spaces[rowIdx][0].value + " / 13";
+        let score = this.board.PlayerRow.spaces[rowIdx][0].specialValue;
+        $space.text("health: " + health + "  score: " + score);
+      } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
+        let value = this.board.PlayerRow.spaces[rowIdx][0].value;
+        let suit = this.board.PlayerRow.spaces[rowIdx][0].suit;
+        $space.text(value + " of " + suit);
       } else {
         $space.text("");
       }
