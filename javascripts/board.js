@@ -38,28 +38,45 @@ class Board {
     this.PlayerRow.clearDestroyed();
   }
 
-  // this should really be select location (which may contain a card)
-  selectCard(card) {
+  selectTarget(target) {
     if (!this.moveBuffer) {
-      this.moveBuffer = card;
-    } else if (this.legalMove(this.moveBuffer, card)){
-      this.resolveAction(this.moveBuffer, card);
+      this.moveBuffer = target;
+    } else if (this.legalMove(target)){
+      this.resolveAction(target);
     }
   }
 
-  resolveAction(card, target) {
-    if (target.suit === "player") {
-      if (card.suit === "monsters") {
-        target.updateValue(card.value * -1);
-      } else if (card.suit === "potions") {
-        target.updateValue(card.value);
+  resolveAction(target) {
+    const bCard = this.moveBuffer.card;
+    const bLoc = this.moveBuffer.location;
+    const tCard = target.card;
+    const tLoc = target.location;
+
+    if (bCard.suit === "monsters") {
+      if (tCard.suit === "player") {
+        bCard.destroy();
+        tCard.updateValue(bCard.value * -1);
+        if (tCard.value < 1) {
+          tCard.destroy();
+        }
+      } else if (tCard.suit === "shields") {
+        bCard.destroy();
+        const leftover = bCard.value - tCard.value;
+        tCard.updateValue(bCard.value * -1);
+        if (tCard.value < 1) {
+          tCard.destroy();
+          if (leftover > 0) {
+            const player = this.PlayerRow.player();
+            player.updateValue(leftover * -1);
+            if (player.value < 1) {
+              player.destroy();
+            }
+          }
+        }
       }
-    } else if (target.suit === "monsters") {
-      target.updateValue(card.value * -1);
     }
   }
 
-  // this is going to require the card's location!
   legalMove(target) {
     const bCard = this.moveBuffer.card;
     const bLoc = this.moveBuffer.location;

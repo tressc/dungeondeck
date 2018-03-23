@@ -54,30 +54,49 @@ class View {
   }
 
   bindEvents() {
-    this.$root.on("click", ".deck", (event => {
-      console.log(this.board.Deck.draw(3));
-      $(event.currentTarget).text(this.board.Deck.count);
-    }));
-
-    this.$root.on("click", ".drow li", (event => {
-      const pos = $(event.currentTarget).data("pos");
-      console.log($(event.currentTarget).data("loc"));
-      const card = this.board.DungeonRow.spaces[pos][0];
-      this.board.burnCard(card);
-      this.board.popIfDungeonEmpty();
-      const $lis = $('.drow ul')[0].childNodes;
-      for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
-        let text = "";
-        if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
-          text = this.board.DungeonRow.spaces[rowIdx][0].suit;
+    this.$root.on("click", "li", (event => {
+      let location = "";
+      let card = null;
+      let idx = $(event.currentTarget).data("pos");
+      if ($(event.currentTarget).data("loc") === "dungeon") {
+        if (this.board.DungeonRow.spaces[idx].length > 0) {
+          card = this.board.DungeonRow.spaces[idx][0];
         }
-        $($lis[rowIdx]).text(text);
+      } else {
+        if (this.board.PlayerRow.spaces[idx].length > 0) {
+          card = this.board.PlayerRow.spaces[idx][0];
+        }
       }
-      $('.deck').text(this.board.Deck.count);
-      let value = this.board.PlayerRow.spaces[0][0].specialValue;
-      $($('.prow')[0].childNodes[0].childNodes[0]).text(value);
+
+
     }));
   }
+
+  // bindEvents() {
+  //   this.$root.on("click", ".deck", (event => {
+  //     console.log(this.board.Deck.draw(3));
+  //     $(event.currentTarget).text(this.board.Deck.count);
+  //   }));
+  //
+  //   this.$root.on("click", ".drow li", (event => {
+  //     const pos = $(event.currentTarget).data("pos");
+  //     console.log($(event.currentTarget).data("loc"));
+  //     const card = this.board.DungeonRow.spaces[pos][0];
+  //     this.board.burnCard(card);
+  //     this.board.popIfDungeonEmpty();
+  //     const $lis = $('.drow ul')[0].childNodes;
+  //     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+  //       let text = "";
+  //       if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
+  //         text = this.board.DungeonRow.spaces[rowIdx][0].suit;
+  //       }
+  //       $($lis[rowIdx]).text(text);
+  //     }
+  //     $('.deck').text(this.board.Deck.count);
+  //     let value = this.board.PlayerRow.spaces[0][0].specialValue;
+  //     $($('.prow')[0].childNodes[0].childNodes[0]).text(value);
+  //   }));
+  // }
 }
 
 export default View;

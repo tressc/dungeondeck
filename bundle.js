@@ -74,7 +74,6 @@ class Card {
     this.value = value;
     this.destroyed = false;
     this.specialValue = 0;
-    this.tempDestroyed = false;
   }
 
   updateValue(change) {
@@ -174,28 +173,45 @@ class Board {
     this.PlayerRow.clearDestroyed();
   }
 
-  // this should really be select location (which may contain a card)
-  selectCard(card) {
+  selectTarget(target) {
     if (!this.moveBuffer) {
-      this.moveBuffer = card;
-    } else if (this.legalMove(this.moveBuffer, card)){
-      this.resolveAction(this.moveBuffer, card);
+      this.moveBuffer = target;
+    } else if (this.legalMove(target)){
+      this.resolveAction(target);
     }
   }
 
-  resolveAction(card, target) {
-    if (target.suit === "player") {
-      if (card.suit === "monsters") {
-        target.updateValue(card.value * -1);
-      } else if (card.suit === "potions") {
-        target.updateValue(card.value);
+  resolveAction(target) {
+    const bCard = this.moveBuffer.card;
+    const bLoc = this.moveBuffer.location;
+    const tCard = target.card;
+    const tLoc = target.location;
+
+    if (bCard.suit === "monsters") {
+      if (tCard.suit === "player") {
+        bCard.destroy();
+        tCard.updateValue(bCard.value * -1);
+        if (tCard.value < 1) {
+          tCard.destroy();
+        }
+      } else if (tCard.suit === "shields") {
+        bCard.destroy();
+        const leftover = bCard.value - tCard.value;
+        tCard.updateValue(bCard.value * -1);
+        if (tCard.value < 1) {
+          tCard.destroy();
+          if (leftover > 0) {
+            const player = this.PlayerRow.player();
+            player.updateValue(leftover * -1);
+            if (player.value < 1) {
+              player.destroy();
+            }
+          }
+        }
       }
-    } else if (target.suit === "monsters") {
-      target.updateValue(card.value * -1);
     }
   }
 
-  // this is going to require the card's location!
   legalMove(target) {
     const bCard = this.moveBuffer.card;
     const bLoc = this.moveBuffer.location;
@@ -495,30 +511,49 @@ class View {
   }
 
   bindEvents() {
-    this.$root.on("click", ".deck", (event => {
-      console.log(this.board.Deck.draw(3));
-      $(event.currentTarget).text(this.board.Deck.count);
-    }));
-
-    this.$root.on("click", ".drow li", (event => {
-      const pos = $(event.currentTarget).data("pos");
-      console.log($(event.currentTarget).data("loc"));
-      const card = this.board.DungeonRow.spaces[pos][0];
-      this.board.burnCard(card);
-      this.board.popIfDungeonEmpty();
-      const $lis = $('.drow ul')[0].childNodes;
-      for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
-        let text = "";
-        if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
-          text = this.board.DungeonRow.spaces[rowIdx][0].suit;
+    this.$root.on("click", "li", (event => {
+      let location = "";
+      let card = null;
+      let idx = $(event.currentTarget).data("pos");
+      if ($(event.currentTarget).data("loc") === "dungeon") {
+        if (this.board.DungeonRow.spaces[idx].length > 0) {
+          card = this.board.DungeonRow.spaces[idx][0];
         }
-        $($lis[rowIdx]).text(text);
+      } else {
+        if (this.board.PlayerRow.spaces[idx].length > 0) {
+          card = this.board.PlayerRow.spaces[idx][0];
+        }
       }
-      $('.deck').text(this.board.Deck.count);
-      let value = this.board.PlayerRow.spaces[0][0].specialValue;
-      $($('.prow')[0].childNodes[0].childNodes[0]).text(value);
+
+
     }));
   }
+
+  // bindEvents() {
+  //   this.$root.on("click", ".deck", (event => {
+  //     console.log(this.board.Deck.draw(3));
+  //     $(event.currentTarget).text(this.board.Deck.count);
+  //   }));
+  //
+  //   this.$root.on("click", ".drow li", (event => {
+  //     const pos = $(event.currentTarget).data("pos");
+  //     console.log($(event.currentTarget).data("loc"));
+  //     const card = this.board.DungeonRow.spaces[pos][0];
+  //     this.board.burnCard(card);
+  //     this.board.popIfDungeonEmpty();
+  //     const $lis = $('.drow ul')[0].childNodes;
+  //     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+  //       let text = "";
+  //       if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
+  //         text = this.board.DungeonRow.spaces[rowIdx][0].suit;
+  //       }
+  //       $($lis[rowIdx]).text(text);
+  //     }
+  //     $('.deck').text(this.board.Deck.count);
+  //     let value = this.board.PlayerRow.spaces[0][0].specialValue;
+  //     $($('.prow')[0].childNodes[0].childNodes[0]).text(value);
+  //   }));
+  // }
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (View);
