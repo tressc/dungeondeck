@@ -174,8 +174,11 @@ class Board {
   }
 
   selectTarget(target) {
+    if (target.card === null) return;
     if (!this.moveBuffer) {
       this.moveBuffer = target;
+    } else if (target.card === this.moveBuffer.card) {
+      this.moveBuffer = null;
     } else if (this.legalMove(target)){
       this.resolveAction(target);
     }
@@ -209,10 +212,10 @@ class Board {
           }
         }
       }
-      this.moveBuffer = null;
-      this.clearAllDestroyed();
-      this.popIfDungeonEmpty();
-    }
+    } else
+    this.moveBuffer = null;
+    this.clearAllDestroyed();
+    this.popIfDungeonEmpty();
   }
 
   legalMove(target) {
