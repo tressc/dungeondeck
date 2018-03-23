@@ -4,6 +4,7 @@ class Card {
     this.value = value;
     this.destroyed = false;
     this.specialValue = 0;
+    this.frozen = false;
   }
 
   updateValue(change) {
@@ -16,6 +17,10 @@ class Card {
 
   destroy() {
     this.destroyed = true;
+  }
+
+  freeze() {
+    this.frozen = true;
   }
 
 }

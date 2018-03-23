@@ -74,6 +74,7 @@ class Card {
     this.value = value;
     this.destroyed = false;
     this.specialValue = 0;
+    this.frozen = false;
   }
 
   updateValue(change) {
@@ -86,6 +87,10 @@ class Card {
 
   destroy() {
     this.destroyed = true;
+  }
+
+  freeze() {
+    this.frozen = true;
   }
 
 }
@@ -155,8 +160,13 @@ class Board {
   }
 
   popIfDungeonEmpty() {
-    if (this.DungeonRow.count === 1) {
-      this.populateDungeon(3);
+    let count = this.DungeonRow.count;
+    if (count < 2) {
+      if (count === 1) {
+        this.populateDungeon(3);
+      } else if (count === 0) {
+        this.populateDungeon(4);
+      }
       this.PlayerRow.destroyTemps();
       this.clearAllDestroyed();
     }
@@ -180,6 +190,10 @@ class Board {
       } else if (target.card.suit === "player") {
         return;
       }
+    }
+
+    if (target.card && target.card.frozen) {
+      return;
     }
 
     if (!this.moveBuffer) {
@@ -229,6 +243,11 @@ class Board {
       } else if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
         let card = this.DungeonRow.spaces[bLoc.idx].pop();
         this.PlayerRow.spaces[tLoc.idx].push(card);
+        if (card.suit === "coins") {
+          card.freeze();
+          const player = this.PlayerRow.player();
+          player.updateSpecial(bCard.value);
+        }
       }
     } else if (bLoc.row === "player") {
       if (bCard.suit === "potions") {
@@ -238,21 +257,30 @@ class Board {
         if (player.value > 13) {
           player.value = 13;
         }
-      } else if (bCard.suit === "coins") {
-        bCard.destroy();
-        const player = this.PlayerRow.player();
-        player.updateSpecial(bCard.value);
       } else if (bCard.suit === "swords") {
         bCard.destroy();
         tCard.updateValue(bCard.value * -1);
         if (tCard.value < 1) {
           tCard.destroy();
         }
+      } else if (bCard.suit === "magic") {
+        bCard.destroy();
+        this.reshuffle();
       }
     }
     this.moveBuffer = null;
     this.clearAllDestroyed();
     this.popIfDungeonEmpty();
+  }
+
+  reshuffle() {
+    let dRow = this.DungeonRow.spaces;
+    for (let i = 0; i < 4; i++) {
+      if (dRow[i].length === 1) {
+        this.Deck.deck.push(dRow[i].pop());
+      }
+    }
+    this.Deck.shuffle();
   }
 
   legalMove(target) {
@@ -284,7 +312,7 @@ class Board {
         if (tCard.suit === "monsters") {
           return true;
         }
-      } else if (bCard.suit === "potions" || bCard.suit === "coins") {
+      } else if (bCard.suit === "potions" || bCard.suit === "magic") {
         if (tCard.suit === "player") {
           return true;
         }
@@ -467,7 +495,7 @@ class PlayerRow {
   destroyTemps() {
     for (let i = 0; i < 4; i++) {
       if (this.spaces[i].length) {
-        if (this.spaces[i][0].tempDestroyed) {
+        if (this.spaces[i][0].frozen) {
           this.spaces[i][0].destroyed = true;
         }
       }
@@ -563,6 +591,9 @@ class View {
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
+        if (card.frozen) {
+          $space.addClass("frozen");
+        }
         $space.text(value + " of " + suit);
       } else {
         $space.text("");
@@ -623,13 +654,11 @@ class View {
       this.$root.empty();
       this.setupBoard();
     }));
-    this.$root.on("click", ".deck", (event => {
-      this.board.Deck.draw(3);
-      this.$root.empty();
-      this.setupBoard();
-      // console.log(this.board);
-      // $(event.currentTarget).text(this.board.Deck.count);
-    }));
+    // this.$root.on("click", ".deck", (event => {
+    //   this.board.Deck.draw(3);
+    //   this.$root.empty();
+    //   this.setupBoard();
+    // }));
   }
 
   // bindEvents() {

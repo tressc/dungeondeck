@@ -55,6 +55,9 @@ class View {
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
+        if (card.frozen) {
+          $space.addClass("frozen");
+        }
         $space.text(value + " of " + suit);
       } else {
         $space.text("");
@@ -115,13 +118,11 @@ class View {
       this.$root.empty();
       this.setupBoard();
     }));
-    this.$root.on("click", ".deck", (event => {
-      this.board.Deck.draw(3);
-      this.$root.empty();
-      this.setupBoard();
-      // console.log(this.board);
-      // $(event.currentTarget).text(this.board.Deck.count);
-    }));
+    // this.$root.on("click", ".deck", (event => {
+    //   this.board.Deck.draw(3);
+    //   this.$root.empty();
+    //   this.setupBoard();
+    // }));
   }
 
   // bindEvents() {

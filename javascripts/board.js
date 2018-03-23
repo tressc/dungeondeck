@@ -20,8 +20,13 @@ class Board {
   }
 
   popIfDungeonEmpty() {
-    if (this.DungeonRow.count === 1) {
-      this.populateDungeon(3);
+    let count = this.DungeonRow.count;
+    if (count < 2) {
+      if (count === 1) {
+        this.populateDungeon(3);
+      } else if (count === 0) {
+        this.populateDungeon(4);
+      }
       this.PlayerRow.destroyTemps();
       this.clearAllDestroyed();
     }
@@ -45,6 +50,10 @@ class Board {
       } else if (target.card.suit === "player") {
         return;
       }
+    }
+
+    if (target.card && target.card.frozen) {
+      return;
     }
 
     if (!this.moveBuffer) {
@@ -94,6 +103,11 @@ class Board {
       } else if (this.PlayerRow.spaces[tLoc.idx].length === 0) {
         let card = this.DungeonRow.spaces[bLoc.idx].pop();
         this.PlayerRow.spaces[tLoc.idx].push(card);
+        if (card.suit === "coins") {
+          card.freeze();
+          const player = this.PlayerRow.player();
+          player.updateSpecial(bCard.value);
+        }
       }
     } else if (bLoc.row === "player") {
       if (bCard.suit === "potions") {
@@ -103,21 +117,30 @@ class Board {
         if (player.value > 13) {
           player.value = 13;
         }
-      } else if (bCard.suit === "coins") {
-        bCard.destroy();
-        const player = this.PlayerRow.player();
-        player.updateSpecial(bCard.value);
       } else if (bCard.suit === "swords") {
         bCard.destroy();
         tCard.updateValue(bCard.value * -1);
         if (tCard.value < 1) {
           tCard.destroy();
         }
+      } else if (bCard.suit === "magic") {
+        bCard.destroy();
+        this.reshuffle();
       }
     }
     this.moveBuffer = null;
     this.clearAllDestroyed();
     this.popIfDungeonEmpty();
+  }
+
+  reshuffle() {
+    let dRow = this.DungeonRow.spaces;
+    for (let i = 0; i < 4; i++) {
+      if (dRow[i].length === 1) {
+        this.Deck.deck.push(dRow[i].pop());
+      }
+    }
+    this.Deck.shuffle();
   }
 
   legalMove(target) {
@@ -149,7 +172,7 @@ class Board {
         if (tCard.suit === "monsters") {
           return true;
         }
-      } else if (bCard.suit === "potions" || bCard.suit === "coins") {
+      } else if (bCard.suit === "potions" || bCard.suit === "magic") {
         if (tCard.suit === "player") {
           return true;
         }

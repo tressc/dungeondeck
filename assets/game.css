@@ -25,3 +25,7 @@ li {
 .selected {
   color: green;
 }
+
+.frozen {
+  color: gray;
+}

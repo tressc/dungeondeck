@@ -28,7 +28,7 @@ class PlayerRow {
   destroyTemps() {
     for (let i = 0; i < 4; i++) {
       if (this.spaces[i].length) {
-        if (this.spaces[i][0].tempDestroyed) {
+        if (this.spaces[i][0].frozen) {
           this.spaces[i][0].destroyed = true;
         }
       }
