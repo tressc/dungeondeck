@@ -555,15 +555,19 @@ class View {
   }
 
   setupBoard() {
+    this.$root.addClass("root");
+
     const $deck = $("<div>");
     $deck.addClass("deck");
-    $deck.text(this.board.Deck.count);
+    $deck.append($(`<img src="https://i.imgur.com/HzKl1v6.png"/>`));
+    $deck.append($(`<div><span>${this.board.Deck.count}</span></div>`));
+    // $deck.text(this.board.Deck.count);
 
     const $fire = $("<li>");
     $fire.addClass("fire");
-    $fire.text("fire");
     $fire.data("pos", null);
     $fire.data("loc", "fire");
+    $fire.append($(`<img src="https://i.imgur.com/phDnO3R.gif"/>`));
 
     const $row1 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
@@ -623,7 +627,7 @@ class View {
         if (card.frozen) {
           $space.addClass("frozen");
         }
-        $card.text(value + " of " + suit);
+        $card.text(value);
         $card.append($(`<img src=${card.img}/>`));
         $space.append($card);
       } else {
@@ -632,6 +636,10 @@ class View {
       $row2.append($space);
     }
 
+    const $top = $("<div>");
+    $top.addClass("top");
+    $top.append($deck);
+    $top.append($fire);
 
     const $drow = $("<div>");
     $drow.addClass("drow");
@@ -643,7 +651,7 @@ class View {
 
     const $youLose = $("<div>");
     $youLose.addClass("you-lose");
-    $youLose.text("you lose!");
+    $youLose.text("you died");
 
     const $youWin = $("<div>");
     $youWin.addClass("you-win");
@@ -654,8 +662,7 @@ class View {
     } else if (this.board.Deck.count === 0 && this.board.DungeonRow.empty()) {
         this.$root.append($youWin);
     } else {
-      this.$root.append($deck);
-      this.$root.append($fire);
+      this.$root.append($top);
       this.$root.append($drow);
       this.$root.append($prow);
     }

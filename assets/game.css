@@ -1,5 +1,13 @@
 * {
   background-color: black;
+  font-family: sans-serif;
+}
+
+.screen {
+  border: 1px solid orange;
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
 }
 
 div {
@@ -13,7 +21,12 @@ li {
 
 .fire {
   user-select: none;
-  color: red;
+}
+
+.fire img {
+  filter: grayscale(100%);
+  min-height: 400px;
+  min-width: 400px;
 }
 
 .you-lose {
@@ -46,8 +59,8 @@ li {
 }
 
 .card {
-  width: 200px;
-  height: 300px;
+  width: 225px;
+  height: 350px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -58,22 +71,23 @@ li {
   background-color: black;
   border: 1px dotted white;
   position: relative;
+  border-radius: 20px;
 }
 
 .card:before {
   content: " ";
   position: absolute;
   z-index: 1000;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
+  top: 25px;
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
   border: 2px solid white;
 }
 
 .card-slot {
-  width: 200px;
-  height: 300px;
+  width: 225px;
+  height: 350px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -82,6 +96,7 @@ li {
   text-align: center;
   background-color: black;
   border: 1px dotted white;
+  border-radius: 20px;
 }
 
 .player {
@@ -91,4 +106,40 @@ li {
 img {
   max-width: 150px;
   max-height: 150px;
+}
+
+.root {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.deck img {
+  min-height: 300px;
+  min-width: 200px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.deck div {
+  font-size: 30px;
+  position: absolute;
+  top: 110px;
+  left: 55px;
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 7px solid white;
+}
+
+.top {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
