@@ -20,6 +20,8 @@ class View {
 
     const $row1 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+      let $card = $("<div>");
+      $card.addClass("card");
       let $cardSlot = $("<div>");
       $cardSlot.addClass("card-slot");
       let $space = $("<li>");
@@ -29,11 +31,13 @@ class View {
         let card = this.board.DungeonRow.spaces[rowIdx][0];
         let value = card.value;
         let suit = card.suit;
+        let img = card.img;
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
-        $cardSlot.text(value + " of " + suit);
-        $space.append($cardSlot);
+        $card.text(value + " of " + suit);
+        $card.append($(`<img src=${card.img}/>`));
+        $space.append($card);
       } else {
         $space.append($cardSlot);
       }
@@ -42,6 +46,8 @@ class View {
 
     const $row2 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+      let $card = $("<div>");
+      $card.addClass("card");
       let $cardSlot = $("<div>");
       $cardSlot.addClass("card-slot");
       let $space = $("<li>");
@@ -49,23 +55,28 @@ class View {
       $space.data("loc", "player");
       if (rowIdx === 0) {
         if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
-          let health = this.board.PlayerRow.spaces[rowIdx][0].value + " / 13";
-          let score = this.board.PlayerRow.spaces[rowIdx][0].specialValue;
-          $cardSlot.text("health: " + health + "  score: " + score);
-          $space.append($cardSlot);
+          let card = this.board.PlayerRow.spaces[rowIdx][0];
+          let health = card.value + " / 13";
+          let score = card.specialValue;
+          let img = card.img;
+          $card.text("health: " + health + "  score: " + score);
+          $card.append($(`<img src=${card.img}/>`));
+          $space.append($card);
         }
       } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
         let card = this.board.PlayerRow.spaces[rowIdx][0];
         let value = card.value;
         let suit = card.suit;
+        let img = card.img;
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
         if (card.frozen) {
           $space.addClass("frozen");
         }
-        $cardSlot.text(value + " of " + suit);
-        $space.append($cardSlot);
+        $card.text(value + " of " + suit);
+        $card.append($(`<img src=${card.img}/>`));
+        $space.append($card);
       } else {
         $space.append($cardSlot);
       }

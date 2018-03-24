@@ -69,12 +69,13 @@
 
 "use strict";
 class Card {
-  constructor(suit, value) {
+  constructor(suit, value, img) {
     this.suit = suit;
     this.value = value;
     this.destroyed = false;
     this.specialValue = 0;
     this.frozen = false;
+    this.img = img;
   }
 
   updateValue(change) {
@@ -105,7 +106,17 @@ Card.suits = [
 ];
 
 Card.values = [
-  2, 3, 4, 5, 6, 7, 8, 9, 10, "cloak"
+  2, 3, 4, 5, 6, 7, 8, 9, 10, "door"
+];
+
+Card.imgs = [
+  "https://i.imgur.com/VSfIozr.png",
+  "https://i.imgur.com/Zd3cxiV.png",
+  "https://i.imgur.com/uHmZ39z.png",
+  "https://i.imgur.com/VAPa9HY.png",
+  "https://i.imgur.com/46QvyiL.png",
+  "https://i.imgur.com/0JJTGtd.png",
+  "https://i.imgur.com/GWTBJQb.png",
 ];
 
 /* harmony default export */ __webpack_exports__["a"] = (Card);
@@ -340,22 +351,22 @@ class Deck {
     this.deck = [];
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 6; j++) {
-        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].imgs[i]));
       }
     }
     for (let i = 2; i < 4; i++) {
       for (let j = 0; j < 9; j++) {
-        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j]));
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[j], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].imgs[i]));
       }
     }
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 2; j++) {
-        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[i]));
+        this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[i], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].imgs[4]));
       }
     }
-    this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8]));
+    this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[4], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[8], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].imgs[4]));
     for (let i = 0; i < 5; i++) {
-      this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[9]));
+      this.deck.push(new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].suits[5], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].values[9], __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].imgs[5]));
     }
     this.shuffle();
     this.count = this.deck.length;
@@ -469,7 +480,7 @@ class DungeonRow {
 
 class PlayerRow {
   constructor() {
-    const newPlayer = new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */]("player", 13);
+    const newPlayer = new __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */]("player", 13, __WEBPACK_IMPORTED_MODULE_0__card_js__["a" /* default */].imgs[6]);
     this.spaces = [
       [newPlayer],
       [],
@@ -556,6 +567,8 @@ class View {
 
     const $row1 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+      let $card = $("<div>");
+      $card.addClass("card");
       let $cardSlot = $("<div>");
       $cardSlot.addClass("card-slot");
       let $space = $("<li>");
@@ -565,11 +578,13 @@ class View {
         let card = this.board.DungeonRow.spaces[rowIdx][0];
         let value = card.value;
         let suit = card.suit;
+        let img = card.img;
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
-        $cardSlot.text(value + " of " + suit);
-        $space.append($cardSlot);
+        $card.text(value + " of " + suit);
+        $card.append($(`<img src=${card.img}/>`));
+        $space.append($card);
       } else {
         $space.append($cardSlot);
       }
@@ -578,6 +593,8 @@ class View {
 
     const $row2 = $("<ul>");
     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
+      let $card = $("<div>");
+      $card.addClass("card");
       let $cardSlot = $("<div>");
       $cardSlot.addClass("card-slot");
       let $space = $("<li>");
@@ -585,23 +602,28 @@ class View {
       $space.data("loc", "player");
       if (rowIdx === 0) {
         if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
-          let health = this.board.PlayerRow.spaces[rowIdx][0].value + " / 13";
-          let score = this.board.PlayerRow.spaces[rowIdx][0].specialValue;
-          $cardSlot.text("health: " + health + "  score: " + score);
-          $space.append($cardSlot);
+          let card = this.board.PlayerRow.spaces[rowIdx][0];
+          let health = card.value + " / 13";
+          let score = card.specialValue;
+          let img = card.img;
+          $card.text("health: " + health + "  score: " + score);
+          $card.append($(`<img src=${card.img}/>`));
+          $space.append($card);
         }
       } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
         let card = this.board.PlayerRow.spaces[rowIdx][0];
         let value = card.value;
         let suit = card.suit;
+        let img = card.img;
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
         if (card.frozen) {
           $space.addClass("frozen");
         }
-        $cardSlot.text(value + " of " + suit);
-        $space.append($cardSlot);
+        $card.text(value + " of " + suit);
+        $card.append($(`<img src=${card.img}/>`));
+        $space.append($card);
       } else {
         $space.append($cardSlot);
       }

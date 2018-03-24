@@ -2,7 +2,7 @@ import Card from './card.js';
 
 class PlayerRow {
   constructor() {
-    const newPlayer = new Card("player", 13);
+    const newPlayer = new Card("player", 13, Card.imgs[6]);
     this.spaces = [
       [newPlayer],
       [],

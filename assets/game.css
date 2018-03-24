@@ -1,6 +1,6 @@
 div {
   user-select: none;
-  color: blue;
+  color: white;
 }
 
 li {
@@ -41,12 +41,45 @@ li {
   justify-content: space-around;
 }
 
-.card-slot {
-  width: 100px;
-  height: 150px;
+.card {
+  width: 200px;
+  height: 300px;
   border: 1px solid black;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  background-color: black;
+  border: 1px solid red;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.card.before {
+  content: " ";
+  position: absolute;
+  z-index: 1000;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid blue;
+}
+
+.card-slot {
+  width: 200px;
+  height: 300px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: black;
+}
+
+img {
+  max-width: 100px;
+  max-height: 100px;
 }

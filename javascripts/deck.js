@@ -6,22 +6,22 @@ class Deck {
     this.deck = [];
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 6; j++) {
-        this.deck.push(new Card(Card.suits[i], Card.values[j]));
+        this.deck.push(new Card(Card.suits[i], Card.values[j], Card.imgs[i]));
       }
     }
     for (let i = 2; i < 4; i++) {
       for (let j = 0; j < 9; j++) {
-        this.deck.push(new Card(Card.suits[i], Card.values[j]));
+        this.deck.push(new Card(Card.suits[i], Card.values[j], Card.imgs[i]));
       }
     }
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 2; j++) {
-        this.deck.push(new Card(Card.suits[4], Card.values[i]));
+        this.deck.push(new Card(Card.suits[4], Card.values[i], Card.imgs[4]));
       }
     }
-    this.deck.push(new Card(Card.suits[4], Card.values[8]));
+    this.deck.push(new Card(Card.suits[4], Card.values[8], Card.imgs[4]));
     for (let i = 0; i < 5; i++) {
-      this.deck.push(new Card(Card.suits[5], Card.values[9]));
+      this.deck.push(new Card(Card.suits[5], Card.values[9], Card.imgs[5]));
     }
     this.shuffle();
     this.count = this.deck.length;
