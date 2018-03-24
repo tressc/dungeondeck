@@ -35,7 +35,7 @@ class View {
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
-        $card.text(value + " of " + suit);
+        $card.text(value);
         $card.append($(`<img src=${card.img}/>`));
         $space.append($card);
       } else {
@@ -55,12 +55,14 @@ class View {
       $space.data("loc", "player");
       if (rowIdx === 0) {
         if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
+          $card.addClass("player");
           let card = this.board.PlayerRow.spaces[rowIdx][0];
           let health = card.value + " / 13";
           let score = card.specialValue;
           let img = card.img;
-          $card.text("health: " + health + "  score: " + score);
+          $card.text("health: " + health);
           $card.append($(`<img src=${card.img}/>`));
+          $card.append(`<span>score: ${score}</span>`);
           $space.append($card);
         }
       } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {

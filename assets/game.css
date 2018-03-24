@@ -1,3 +1,7 @@
+* {
+  background-color: black;
+}
+
 div {
   user-select: none;
   color: white;
@@ -48,15 +52,15 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
+  font-size: 40px;
   background-color: black;
-  border: 1px solid red;
-  box-sizing: border-box;
+  border: 1px dotted white;
   position: relative;
 }
 
-.card.before {
+.card:before {
   content: " ";
   position: absolute;
   z-index: 1000;
@@ -64,7 +68,7 @@ li {
   left: 5px;
   right: 5px;
   bottom: 5px;
-  border: 1px solid blue;
+  border: 2px solid white;
 }
 
 .card-slot {
@@ -74,12 +78,17 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   background-color: black;
+  border: 1px dotted white;
+}
+
+.player {
+  font-size: 25px;
 }
 
 img {
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 150px;
+  max-height: 150px;
 }
