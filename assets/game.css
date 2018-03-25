@@ -130,26 +130,53 @@ img {
   position: absolute;
   top: 50px;
   left: 0;
+  transform: rotate(-90);
+  transition: 3s;
+}
+
+.gear {
   cursor: pointer;
 }
 
 .settings img {
   height: 50px;
   width: 50px;
+  cursor: pointer;
+}
+
+.settings-item {
+  margin-bottom: 20px;
 }
 
 .settings img:hover {
   opacity: 0.7;
 }
 
-.settings button {
-  color: white;
-  border: none;
-}
-
 .settings button:active {
   outline: none;
   opacity: 0.7;
+}
+
+.turnt img {
+  transition: 3s;
+  transform: rotate(90deg);
+}
+
+.turntUp img {
+  transition: 3s;
+  transform: rotate(0deg);
+}
+
+.unhidden {
+  opacity: 1;
+  transition: 3s;
+  visibility: visible;
+}
+
+.hidden {
+  opacity: 0;
+  transition: 3s;
+  visibility: hidden;
 }
 
 .deck img {
@@ -207,4 +234,16 @@ img {
 .you-win img {
   min-height: 200px;
   min-width: 800px;
+}
+
+.rules {
+  display: flex;
+  align-items: center;
+  width: 1100px;
+  height: 1200px;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  z-index: 2000;
+  top: 0;
+  left: 80px;
 }

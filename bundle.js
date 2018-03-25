@@ -554,6 +554,7 @@ class View {
     this.$root = $root;
     this.settings = false;
     this.sound = true;
+    this.rules = false;
 
     this.setupBoard();
     this.bindEvents();
@@ -646,12 +647,33 @@ class View {
 
     const $settings = $("<div>");
     $settings.addClass("settings");
-    $settings.append($(`<img src="https://i.imgur.com/K8KgyU1.png"/>`));
+    const $gear = $("<div>");
+    $gear.addClass("gear");
+    $gear.append($(`<img src="https://i.imgur.com/K8KgyU1.png"/>`));
+    $settings.append($gear);
 
     const $settingsList = $("<ul>");
-    const $settingsItem = $("<li>");
+    $settingsList.addClass("hidden");
+
     const $soundButton = $("<div>");
     $soundButton.append($(`<img src="https://i.imgur.com/sXruLuV.png"/>`));
+    
+    const $rulesButton = $("<div>");
+    $rulesButton.append($(`<img src="https://i.imgur.com/LOyH4LH.png"/>`));
+
+    $gear.on("click", (event => {
+      if (this.settings) {
+        $gear.addClass("turntUp");
+        $settingsList.addClass("hidden");
+        this.settings = false;
+      } else {
+        $gear.addClass("turnt");
+        $gear.removeClass("turntUp");
+        $settingsList.addClass("unhidden");
+        $settingsList.removeClass("hidden");
+        this.settings = true;
+      }
+    }));
 
     $soundButton.on("click", (event => {
       if (this.sound === true) {
@@ -667,13 +689,35 @@ class View {
       }
     }));
 
+    const $rules = $("<div>");
+    $rules.addClass("rules");
+    $rules.addClass("hidden");
+    $rules.append($("<p>these are the rules...</p>"));
+
+    $rulesButton.on("click", (event => {
+      if (this.rules) {
+        $rules.addClass("hidden");
+        this.rules = false;
+      } else {
+        $rules.addClass("unhidden");
+        $rules.removeClass("hidden");
+        this.rules = true;
+      }
+    }));
 
 
-
-    $settingsItem.append($soundButton);
-    $settingsList.append($settingsItem);
-    $settings.append($settingsList);
-
+    for (let i = 0; i < 2; i++) {
+      const $settingsItem = $("<li>");
+      $settingsItem.addClass("settings-item");
+      if (i === 0) {
+        $settingsItem.append($soundButton);
+        $settingsList.append($settingsItem);
+      } else {
+        $settingsItem.append($rulesButton);
+        $settingsList.append($settingsItem);
+      }
+      $settings.append($settingsList);
+    }
 
     const $top = $("<div>");
     $top.addClass("top");
@@ -703,6 +747,7 @@ class View {
     } else if (this.board.Deck.count === 0 && this.board.DungeonRow.empty()) {
         this.$root.append($youWin);
     } else {
+      this.$root.append($rules);
       this.$root.append($settings);
       this.$root.append($top);
       this.$root.append($drow);
