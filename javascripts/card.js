@@ -40,13 +40,13 @@ Card.values = [
 ];
 
 Card.imgs = [
-  "https://i.imgur.com/VSfIozr.png",
-  "https://i.imgur.com/Zd3cxiV.png",
-  "https://i.imgur.com/uHmZ39z.png",
-  "https://i.imgur.com/VAPa9HY.png",
-  "https://i.imgur.com/46QvyiL.png",
+  "https://i.imgur.com/Rh8gBbL.png",
+  "https://i.imgur.com/izEcuUG.png",
+  "https://i.imgur.com/X2gtjkv.png",
+  "https://i.imgur.com/TEn6e6B.png",
+  "https://i.imgur.com/ceKsUWJ.png",
   "https://i.imgur.com/0JJTGtd.png",
-  "https://i.imgur.com/GWTBJQb.png",
+  "https://i.imgur.com/L89XhPg.png",
 ];
 
 export default Card;

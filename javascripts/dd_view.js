@@ -12,7 +12,7 @@ class View {
 
     const $deck = $("<div>");
     $deck.addClass("deck");
-    $deck.append($(`<img src="https://i.imgur.com/HzKl1v6.png"/>`));
+    $deck.append($(`<img src="https://i.imgur.com/7nUOKbI.png"/>`));
     $deck.append($(`<div><span>${this.board.Deck.count}</span></div>`));
     // $deck.text(this.board.Deck.count);
 
@@ -61,12 +61,12 @@ class View {
         if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
           $card.addClass("player");
           let card = this.board.PlayerRow.spaces[rowIdx][0];
-          let health = card.value + " / 13";
+          let health = card.value + "/13";
           let score = card.specialValue;
           let img = card.img;
-          $card.text("health: " + health);
+          $card.text(health);
           $card.append($(`<img src=${card.img}/>`));
-          $card.append(`<span>score: ${score}</span>`);
+          $card.append(score);
           $space.append($card);
         }
       } else if (this.board.PlayerRow.spaces[rowIdx].length > 0) {
@@ -80,7 +80,7 @@ class View {
         if (card.frozen) {
           $space.addClass("frozen");
         }
-        $card.text(value);
+        $card.append($(`<span>${value}</span>`));
         $card.append($(`<img src=${card.img}/>`));
         $space.append($card);
       } else {
@@ -91,7 +91,7 @@ class View {
 
     const $settings = $("<div>");
     $settings.addClass("settings");
-    $settings.append($(`<img src="https://i.imgur.com/uO4RR5s.png"/>`));
+    $settings.append($(`<img src="https://i.imgur.com/K8KgyU1.png"/>`));
 
 
     const $top = $("<div>");

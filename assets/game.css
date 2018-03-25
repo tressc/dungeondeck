@@ -1,6 +1,6 @@
 * {
   background-color: black;
-  font-family: sans-serif;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .main {
@@ -43,8 +43,12 @@ li {
   box-shadow: 0 0 0 3px limegreen;
 }
 
-.frozen div {
-  color: gray;
+.frozen div img {
+  opacity: 0.3;
+}
+
+.frozen div span {
+  opacity: 0.3;
 }
 
 .drow ul{
@@ -82,7 +86,7 @@ li {
   left: 15px;
   right: 15px;
   bottom: 15px;
-  border: 2px solid white;
+  border: 3px solid white;
 }
 
 .card-slot {
