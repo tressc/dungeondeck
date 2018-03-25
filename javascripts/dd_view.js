@@ -104,11 +104,11 @@ class View {
 
     const $youLose = $("<div>");
     $youLose.addClass("you-lose");
-    $youLose.text("you died");
+    $youLose.append($(`<img src="https://i.imgur.com/MadL9Zr.png"/>`));
 
     const $youWin = $("<div>");
     $youWin.addClass("you-win");
-    $youWin.text("you win!");
+    $youWin.append($(`<img src="https://i.imgur.com/tlfOByO.png"/>`));
 
     if (this.board.PlayerRow.spaces[0].length === 0) {
       this.$root.append($youLose);
@@ -145,11 +145,11 @@ class View {
       this.$root.empty();
       this.setupBoard();
     }));
-    // this.$root.on("click", ".deck", (event => {
-    //   this.board.Deck.draw(3);
-    //   this.$root.empty();
-    //   this.setupBoard();
-    // }));
+    this.$root.on("click", ".deck", (event => {
+      this.board.Deck.draw(3);
+      this.$root.empty();
+      this.setupBoard();
+    }));
   }
 
   // bindEvents() {
