@@ -97,6 +97,7 @@ class View {
 
     const $settings = $("<div>");
     $settings.addClass("settings");
+    
     const $gear = $("<div>");
     $gear.addClass("gear");
     $gear.append($(`<img src="https://i.imgur.com/K8KgyU1.png"/>`));
@@ -107,7 +108,7 @@ class View {
 
     const $soundButton = $("<div>");
     $soundButton.append($(`<img src="https://i.imgur.com/sXruLuV.png"/>`));
-    
+
     const $rulesButton = $("<div>");
     $rulesButton.append($(`<img src="https://i.imgur.com/LOyH4LH.png"/>`));
 
