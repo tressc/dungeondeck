@@ -656,10 +656,12 @@ class View {
 
     const $youLose = $("<div>");
     $youLose.addClass("you-lose");
+    // $youLose.append($settings);
     $youLose.append($(`<img src="https://i.imgur.com/MadL9Zr.png"/>`));
 
     const $youWin = $("<div>");
     $youWin.addClass("you-win");
+    // $youWin.append($settings);
     $youWin.append($(`<img src="https://i.imgur.com/tlfOByO.png"/>`));
 
     if (this.board.PlayerRow.spaces[0].length === 0) {
