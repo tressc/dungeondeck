@@ -39,6 +39,9 @@ class View {
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
+        if (value === "magic door") {
+          $card.addClass("magic");
+        }
         $card.text(value);
         $card.append($(`<img src=${card.img}/>`));
         $space.append($card);

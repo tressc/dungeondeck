@@ -12,8 +12,8 @@
   margin-top: 100px;
   border: 7px solid white;
   border-radius: 20px;
-  width: 1200px;
-  height: 1200px;
+  min-width: 1200px;
+  min-height: 1200px;
   overflow: hidden;
   position: relative;
 }
@@ -102,6 +102,10 @@ li {
   border: 1px dotted white;
   border-radius: 20px;
   margin: 0 15px;
+}
+
+.magic {
+  font-size: 30px;
 }
 
 .player {

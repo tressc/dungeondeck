@@ -39,9 +39,12 @@ Card.values = [
   2, 3, 4, 5, 6, 7, 8, 9, 10, "magic door"
 ];
 
+// gladius: https://i.imgur.com/izEcuUG.png
+
+
 Card.imgs = [
   "https://i.imgur.com/Rh8gBbL.png",
-  "https://i.imgur.com/izEcuUG.png",
+  "https://i.imgur.com/1ZbWLXW.png",
   "https://i.imgur.com/X2gtjkv.png",
   "https://i.imgur.com/TEn6e6B.png",
   "https://i.imgur.com/ceKsUWJ.png",
