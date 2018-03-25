@@ -636,6 +636,11 @@ class View {
       $row2.append($space);
     }
 
+    const $settings = $("<div>");
+    $settings.addClass("settings");
+    $settings.append($(`<img src="https://i.imgur.com/uO4RR5s.png"/>`));
+
+
     const $top = $("<div>");
     $top.addClass("top");
     $top.append($deck);
@@ -662,6 +667,7 @@ class View {
     } else if (this.board.Deck.count === 0 && this.board.DungeonRow.empty()) {
         this.$root.append($youWin);
     } else {
+      this.$root.append($settings);
       this.$root.append($top);
       this.$root.append($drow);
       this.$root.append($prow);

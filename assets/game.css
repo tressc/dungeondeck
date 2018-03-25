@@ -118,6 +118,22 @@ img {
   align-items: center;
 }
 
+.settings {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  cursor: pointer;
+}
+
+.settings img {
+  height: 50px;
+  width: 50px;
+}
+
+.settings:hover {
+  opacity: 0.7;
+}
+
 .deck img {
   min-height: 300px;
   min-width: 200px;
