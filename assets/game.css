@@ -138,7 +138,17 @@ img {
   width: 50px;
 }
 
-.settings:hover {
+.settings img:hover {
+  opacity: 0.7;
+}
+
+.settings button {
+  color: white;
+  border: none;
+}
+
+.settings button:active {
+  outline: none;
   opacity: 0.7;
 }
 

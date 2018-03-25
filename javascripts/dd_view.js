@@ -2,6 +2,8 @@ class View {
   constructor(board, $root) {
     this.board = board;
     this.$root = $root;
+    this.settings = false;
+    this.sound = true;
 
     this.setupBoard();
     this.bindEvents();
@@ -95,6 +97,32 @@ class View {
     const $settings = $("<div>");
     $settings.addClass("settings");
     $settings.append($(`<img src="https://i.imgur.com/K8KgyU1.png"/>`));
+
+    const $settingsList = $("<ul>");
+    const $settingsItem = $("<li>");
+    const $soundButton = $("<div>");
+    $soundButton.append($(`<img src="https://i.imgur.com/sXruLuV.png"/>`));
+
+    $soundButton.on("click", (event => {
+      if (this.sound === true) {
+        sound.pause();
+        this.sound = false;
+        $soundButton.empty();
+        $soundButton.append($(`<img src="https://i.imgur.com/s1UKgJ0.png"/>`));
+      } else {
+        sound.play();
+        this.sound = true;
+        $soundButton.empty();
+        $soundButton.append($(`<img src="https://i.imgur.com/sXruLuV.png"/>`));
+      }
+    }));
+
+
+
+
+    $settingsItem.append($soundButton);
+    $settingsList.append($settingsItem);
+    $settings.append($settingsList);
 
 
     const $top = $("<div>");
