@@ -567,7 +567,6 @@ class View {
     $deck.addClass("deck");
     $deck.append($(`<img src="https://i.imgur.com/7nUOKbI.png"/>`));
     $deck.append($(`<div><span>${this.board.Deck.count}</span></div>`));
-    // $deck.text(this.board.Deck.count);
 
     const $fire = $("<li>");
     $fire.addClass("fire");
@@ -665,6 +664,11 @@ class View {
     const $rulesButton = $("<div>");
     $rulesButton.append($(`<img src="https://i.imgur.com/LOyH4LH.png"/>`));
 
+    const $rules = $("<div>");
+    $rules.addClass("rules");
+    $rules.addClass("hidden");
+    $rules.append($("<p>these are the rules...</p>"));
+
     $gear.on("click", (event => {
       if (this.settings) {
         $gear.addClass("turntUp");
@@ -693,19 +697,16 @@ class View {
       }
     }));
 
-    const $rules = $("<div>");
-    $rules.addClass("rules");
-    $rules.addClass("hidden");
-    $rules.append($("<p>these are the rules...</p>"));
-
     $rulesButton.on("click", (event => {
+      event.stopPropagation();
       if (this.rules) {
-        $rules.addClass("hidden");
         this.rules = false;
+        $rules.removeClass("unhidden");
+        $rules.addClass("hidden");
       } else {
+        this.rules = true;
         $rules.addClass("unhidden");
         $rules.removeClass("hidden");
-        this.rules = true;
       }
     }));
 
@@ -738,12 +739,10 @@ class View {
 
     const $youLose = $("<div>");
     $youLose.addClass("you-lose");
-    // $youLose.append($settings);
     $youLose.append($(`<img src="https://i.imgur.com/MadL9Zr.png"/>`));
 
     const $youWin = $("<div>");
     $youWin.addClass("you-win");
-    // $youWin.append($settings);
     $youWin.append($(`<img src="https://i.imgur.com/tlfOByO.png"/>`));
 
     if (this.board.PlayerRow.spaces[0].length === 0) {
@@ -789,28 +788,6 @@ class View {
       this.setupBoard();
     }));
   }
-
-  // bindEvents() {
-  //
-  //   this.$root.on("click", ".drow li", (event => {
-  //     const pos = $(event.currentTarget).data("pos");
-  //     console.log($(event.currentTarget).data("loc"));
-  //     const card = this.board.DungeonRow.spaces[pos][0];
-  //     this.board.burnCard(card);
-  //     this.board.popIfDungeonEmpty();
-  //     const $lis = $('.drow ul')[0].childNodes;
-  //     for (let rowIdx = 0; rowIdx < 4; rowIdx++) {
-  //       let text = "";
-  //       if (this.board.DungeonRow.spaces[rowIdx].length > 0) {
-  //         text = this.board.DungeonRow.spaces[rowIdx][0].suit;
-  //       }
-  //       $($lis[rowIdx]).text(text);
-  //     }
-  //     $('.deck').text(this.board.Deck.count);
-  //     let value = this.board.PlayerRow.spaces[0][0].specialValue;
-  //     $($('.prow')[0].childNodes[0].childNodes[0]).text(value);
-  //   }));
-  // }
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (View);

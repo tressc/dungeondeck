@@ -155,6 +155,12 @@ li {
   transition: 3s;
 }
 
+.settings ul {
+  margin-left: 20px;
+  padding: 0;
+  list-style-type: none;
+}
+
 .gear {
   cursor: pointer;
 }
@@ -179,24 +185,24 @@ li {
 }
 
 .turnt img {
-  transition: 3s;
+  transition: 2s;
   transform: rotate(90deg);
 }
 
 .turntUp img {
-  transition: 3s;
+  transition: 2s;
   transform: rotate(0deg);
 }
 
 .unhidden {
   opacity: 1;
-  transition: 3s;
+  transition: 2s;
   visibility: visible;
 }
 
 .hidden {
   opacity: 0;
-  transition: 3s;
+  transition: 2s;
   visibility: hidden;
 }
 
@@ -259,7 +265,7 @@ li {
 
 .rules {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 1100px;
   height: 1200px;
   background-color: rgba(0, 0, 0, 0.8);
@@ -267,4 +273,8 @@ li {
   z-index: 2000;
   top: 0;
   left: 80px;
+}
+
+.rules p {
+  margin-top: 100px;
 }
