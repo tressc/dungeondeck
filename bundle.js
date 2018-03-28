@@ -76,6 +76,7 @@ class Card {
     this.specialValue = 0;
     this.frozen = false;
     this.img = img;
+    this.validTarget = false;
   }
 
   updateValue(change) {
@@ -212,6 +213,7 @@ class Board {
 
     if (!this.moveBuffer) {
       this.moveBuffer = target;
+      // this.highlightTargets();
     } else if (target.card === this.moveBuffer.card) {
       this.moveBuffer = null;
     } else if (this.legalMove(target)){
@@ -295,6 +297,28 @@ class Board {
       }
     }
     this.Deck.shuffle();
+  }
+
+  highlightTargets() {
+    let target = {};
+    for (let i = 0; i < 4; i++) {
+      target.location = {row: "dungeon", idx: i};
+      target.card = this.DungeonRow.spaces[i][0];
+      debugger
+      if (this.legalMove(target)) {
+        if (this.DungeonRow.spaces[i].length > 0) {
+          this.DungeonRow.spaces[i][0].validTarget = true;
+        }
+      }
+      target.location = {row: "player", idx: i};
+      target.card = this.PlayerRow.spaces[i][0];
+      debugger
+      if (this.legalMove(target)) {
+        if (this.PlayerRow.spaces[i].length > 0) {
+          this.PlayerRow.spaces[i][0].validTarget = true;
+        }
+      }
+    }
   }
 
   legalMove(target) {
@@ -637,6 +661,9 @@ class View {
         }
         if (card.frozen) {
           $space.addClass("frozen");
+        }
+        if (card.validTarget) {
+          $space.addClass("valid-target");
         }
         $card.append($(`<span>${value}</span>`));
         $card.append($(`<img src=${card.img}/>`));

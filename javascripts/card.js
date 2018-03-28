@@ -6,6 +6,7 @@ class Card {
     this.specialValue = 0;
     this.frozen = false;
     this.img = img;
+    this.validTarget = false;
   }
 
   updateValue(change) {

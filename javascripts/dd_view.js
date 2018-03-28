@@ -88,6 +88,9 @@ class View {
         if (card.frozen) {
           $space.addClass("frozen");
         }
+        if (card.validTarget) {
+          $space.addClass("valid-target");
+        }
         $card.append($(`<span>${value}</span>`));
         $card.append($(`<img src=${card.img}/>`));
         $space.append($card);

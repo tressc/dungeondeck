@@ -58,6 +58,10 @@ li {
   min-width: 400px;
 }
 
+.legal-target .card {
+    box-shadow: 0 0 0 3px blue;
+}
+
 .selected .card{
   /*outline: solid;
   outline-color: limegreen;*/
@@ -277,4 +281,5 @@ li {
 
 .rules p {
   margin-top: 100px;
+  margin-left: 100px;
 }
