@@ -204,6 +204,10 @@ class Board {
         return;
       } else if (target.card.suit === "player") {
         return;
+      } else if (target.location.row === "player") {
+          if (target.card.suit === "shields") {
+            return;
+          }
       }
     }
 
@@ -213,11 +217,24 @@ class Board {
 
     if (!this.moveBuffer) {
       this.moveBuffer = target;
-      // this.highlightTargets();
+      this.highlightTargets();
     } else if (target.card === this.moveBuffer.card) {
       this.moveBuffer = null;
+      this.removeHighlights();
     } else if (this.legalMove(target)){
+      this.removeHighlights();
       this.resolveAction(target);
+    }
+  }
+
+  removeHighlights() {
+    for (let i = 0; i < 4; i++) {
+      if (this.DungeonRow.spaces[i].length > 0) {
+        this.DungeonRow.spaces[i][0].validTarget = false;
+      }
+      if (this.PlayerRow.spaces[i].length > 0) {
+        this.PlayerRow.spaces[i][0].validTarget = false;
+      }
     }
   }
 
@@ -304,7 +321,6 @@ class Board {
     for (let i = 0; i < 4; i++) {
       target.location = {row: "dungeon", idx: i};
       target.card = this.DungeonRow.spaces[i][0];
-      debugger
       if (this.legalMove(target)) {
         if (this.DungeonRow.spaces[i].length > 0) {
           this.DungeonRow.spaces[i][0].validTarget = true;
@@ -312,7 +328,6 @@ class Board {
       }
       target.location = {row: "player", idx: i};
       target.card = this.PlayerRow.spaces[i][0];
-      debugger
       if (this.legalMove(target)) {
         if (this.PlayerRow.spaces[i].length > 0) {
           this.PlayerRow.spaces[i][0].validTarget = true;
@@ -337,22 +352,28 @@ class Board {
           }
         }
       } else if (bCard.suit === "monsters") {
-        if (tCard.suit === "player") {
-          return true;
-        } if (tLoc.row === "player") {
-          if (tCard.suit === "shields") {
+        if (tCard) {
+          if (tCard.suit === "player") {
             return true;
+          } if (tLoc.row === "player") {
+              if (tCard.suit === "shields") {
+                return true;
+              }
           }
         }
       }
     } else if (bLoc.row === "player") {
       if (bCard.suit === "swords") {
-        if (tCard.suit === "monsters") {
-          return true;
+        if (tCard) {
+          if (tCard.suit === "monsters") {
+            return true;
+          }
         }
       } else if (bCard.suit === "potions" || bCard.suit === "magic") {
-        if (tCard.suit === "player") {
-          return true;
+        if (tCard) {
+          if (tCard.suit === "player") {
+            return true;
+          }
         }
       }
     }
@@ -618,6 +639,9 @@ class View {
         if (value === "magic door") {
           $card.addClass("magic");
         }
+        if (card.validTarget) {
+          $card.addClass("valid-target");
+        }
         $card.text(value);
         $card.append($(`<img src=${card.img}/>`));
         $space.append($card);
@@ -643,6 +667,9 @@ class View {
           let health = card.value + "/13";
           let score = card.specialValue;
           let img = card.img;
+          if (card.validTarget) {
+            $card.addClass("valid-target");
+          }
           $card.text(health);
           $card.append($(`<img src=${card.img}/>`));
           $card.append(score);
@@ -663,7 +690,7 @@ class View {
           $space.addClass("frozen");
         }
         if (card.validTarget) {
-          $space.addClass("valid-target");
+          $card.addClass("valid-target");
         }
         $card.append($(`<span>${value}</span>`));
         $card.append($(`<img src=${card.img}/>`));

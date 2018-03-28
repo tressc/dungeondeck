@@ -44,6 +44,9 @@ class View {
         if (value === "magic door") {
           $card.addClass("magic");
         }
+        if (card.validTarget) {
+          $card.addClass("valid-target");
+        }
         $card.text(value);
         $card.append($(`<img src=${card.img}/>`));
         $space.append($card);
@@ -69,6 +72,9 @@ class View {
           let health = card.value + "/13";
           let score = card.specialValue;
           let img = card.img;
+          if (card.validTarget) {
+            $card.addClass("valid-target");
+          }
           $card.text(health);
           $card.append($(`<img src=${card.img}/>`));
           $card.append(score);
@@ -89,7 +95,7 @@ class View {
           $space.addClass("frozen");
         }
         if (card.validTarget) {
-          $space.addClass("valid-target");
+          $card.addClass("valid-target");
         }
         $card.append($(`<span>${value}</span>`));
         $card.append($(`<img src=${card.img}/>`));
