@@ -5,17 +5,38 @@
 
 .main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.logo img{
+  transform: perspective(500px) rotateX(30deg);
+
+  height: 150px;
+  width: 1000px;
 }
 
 .screen {
-  margin-top: 100px;
+  margin-top: 10px;
   border: 7px solid white;
   border-radius: 20px;
   min-width: 1200px;
   min-height: 1200px;
   overflow: hidden;
   position: relative;
+}
+
+.footer {
+  width: 1200px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer img {
+  max-width: 100px;
+  max-height: 100px;
 }
 
 div {
@@ -112,7 +133,7 @@ li {
   font-size: 25px;
 }
 
-img {
+.screen img {
   max-width: 150px;
   max-height: 150px;
 }

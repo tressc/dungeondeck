@@ -83,6 +83,9 @@ class View {
         if (this.board.moveBuffer && card === this.board.moveBuffer.card) {
           $space.addClass("selected");
         }
+        if (value === "magic door") {
+          $card.addClass("magic");
+        }
         if (card.frozen) {
           $space.addClass("frozen");
         }
@@ -97,7 +100,7 @@ class View {
 
     const $settings = $("<div>");
     $settings.addClass("settings");
-    
+
     const $gear = $("<div>");
     $gear.addClass("gear");
     $gear.append($(`<img src="https://i.imgur.com/K8KgyU1.png"/>`));
