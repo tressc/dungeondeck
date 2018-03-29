@@ -20,6 +20,9 @@ class View {
 
     const $fire = $("<li>");
     $fire.addClass("fire");
+    if (this.board.validSpaces.includes("fire")) {
+      $fire.addClass("bright");
+    }
     $fire.data("pos", null);
     $fire.data("loc", "fire");
     $fire.append($(`<img src="https://i.imgur.com/phDnO3R.gif"/>`));

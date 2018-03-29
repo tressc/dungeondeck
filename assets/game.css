@@ -50,13 +50,17 @@ li {
 
 .fire {
   user-select: none;
+
 }
 
 .fire img {
   filter: grayscale(100%);
-  /*filter: brightness(500);*/
   min-height: 400px;
   min-width: 400px;
+}
+
+.bright img {
+  filter: grayscale(100%) contrast(400%);
 }
 
 .valid-target {

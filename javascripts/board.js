@@ -183,6 +183,11 @@ class Board {
         }
       }
     }
+    target.location = {row: "fire", idx: 0};
+    target.card = null;
+    if (this.legalMove(target)) {
+      this.validSpaces.push("fire");
+    }
   }
 
   legalMove(target) {
