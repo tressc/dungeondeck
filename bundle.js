@@ -167,6 +167,7 @@ class Board {
     this.PlayerRow = new __WEBPACK_IMPORTED_MODULE_2__player_row_js__["a" /* default */];
     this.Fire = new __WEBPACK_IMPORTED_MODULE_3__fire_js__["a" /* default */];
     this.moveBuffer = null;
+    this.validSpaces = [];
   }
 
   populateDungeon(n) {
@@ -236,6 +237,7 @@ class Board {
         this.PlayerRow.spaces[i][0].validTarget = false;
       }
     }
+    this.validSpaces = [];
   }
 
   resolveAction(target) {
@@ -331,6 +333,8 @@ class Board {
       if (this.legalMove(target)) {
         if (this.PlayerRow.spaces[i].length > 0) {
           this.PlayerRow.spaces[i][0].validTarget = true;
+        }  else {
+          this.validSpaces.push(i);
         }
       }
     }
@@ -697,6 +701,9 @@ class View {
         $space.append($card);
       } else {
         $space.append($cardSlot);
+        if (this.board.validSpaces.includes(rowIdx)) {
+          $cardSlot.addClass("valid-target");
+        }
       }
       $row2.append($space);
     }

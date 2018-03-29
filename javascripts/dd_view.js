@@ -102,6 +102,9 @@ class View {
         $space.append($card);
       } else {
         $space.append($cardSlot);
+        if (this.board.validSpaces.includes(rowIdx)) {
+          $cardSlot.addClass("valid-target");
+        }
       }
       $row2.append($space);
     }

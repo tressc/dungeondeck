@@ -54,6 +54,7 @@ li {
 
 .fire img {
   filter: grayscale(100%);
+  /*filter: brightness(500);*/
   min-height: 400px;
   min-width: 400px;
 }
