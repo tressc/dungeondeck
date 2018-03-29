@@ -254,11 +254,11 @@ class View {
       this.$root.empty();
       this.setupBoard();
     }));
-    this.$root.on("click", ".deck", (event => {
-      this.board.Deck.draw(50);
-      this.$root.empty();
-      this.setupBoard();
-    }));
+    // this.$root.on("click", ".deck", (event => {
+    //   this.board.Deck.draw(50);
+    //   this.$root.empty();
+    //   this.setupBoard();
+    // }));
   }
 }
 
