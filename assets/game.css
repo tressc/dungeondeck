@@ -274,7 +274,8 @@ li {
 
 .rules {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 1100px;
   height: 1200px;
   background-color: rgba(0, 0, 0, 0.8);
@@ -285,6 +286,32 @@ li {
 }
 
 .rules p {
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: 100px;
+  margin-right: 150px;
+  line-height: 2.0;
+}
+
+.rules span{
+  color: limegreen;
+}
+
+.rules span span {
+  color: #42e2f4;
+}
+
+.rules span span span {
+  color: red;
+}
+
+.rules span span span span{
+  color: yellow;
+}
+
+.rules span span span span span{
+  color: #bf42f4;
+}
+
+.rules span span span span span span{
+  color: pink;
 }

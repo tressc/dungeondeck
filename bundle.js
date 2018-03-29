@@ -736,8 +736,12 @@ class View {
     const $rules = $("<div>");
     $rules.addClass("rules");
     $rules.addClass("hidden");
-    $rules.append($("<p>these are the rules...</p>"));
-
+    $rules.append($(`<p>Greetings adventurer... In order to escape this dungeon you must clear all the cards from the deck and dungeon (top) row.</p>`));
+    $rules.append($("<p>The deck displays the number of its remaining cards, and the dungeon row refills whenever it contains <span><span><span>three</span></span></span> open spaces.</p>"));
+    $rules.append($('<p>Begin by selecting a card. Selected cards are highlighted in <span>green</span>. You can unselect a card by clicking on it again. All valid targets for that card will be highlighted in <span><span>blue</span></span>. Click on a <span><span>target</span></span> to apply the <span>selected card\'s</span> value to it.</p>'));
+    $rules.append($("<p>Non-monster cards cannot be used before first moving them down into your inventory. If your hands are full you can throw these items in the everpresent dungeon flames instead. The value of their melted down remains will be added to your score. But beware! Melted down <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span>magical items</span></span></span></span></span> are worthless on the black market!</p>"));
+    $rules.append($("<p>Also note that <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span><span>potions</span></span></span></span></span></span> will continue to take up a slot of your inventory until the dungeon row refills.</p>"));
+    $rules.append($("<p>Escape the dungeon alive with as much loot as you can hold!</p>"));
     $gear.on("click", (event => {
       if (this.settings) {
         $gear.addClass("turntUp");
