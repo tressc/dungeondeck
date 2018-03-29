@@ -258,18 +258,27 @@ li {
   width: 1200px;
   height: 1200px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .you-lose img {
-  min-height: 200px;
-  min-width: 500px
+  min-width: 700px;
+  min-height: 80px;
 }
 
 .you-win img {
-  min-height: 200px;
-  min-width: 800px;
+  min-width: 700px;
+  min-height: 80px;
+}
+
+.you-win h1 {
+  margin-top: 30px;
+}
+
+.you-win span {
+  color: limegreen;
 }
 
 .rules {

@@ -739,7 +739,7 @@ class View {
     $rules.append($(`<p>Greetings adventurer... In order to escape this dungeon you must clear all the cards from the deck and dungeon (top) row.</p>`));
     $rules.append($("<p>The deck displays the number of its remaining cards, and the dungeon row refills whenever it contains <span><span><span>three</span></span></span> open spaces.</p>"));
     $rules.append($('<p>Begin by selecting a card. Selected cards are highlighted in <span>green</span>. You can unselect a card by clicking on it again. All valid targets for that card will be highlighted in <span><span>blue</span></span>. Click on a <span><span>target</span></span> to apply the <span>selected card\'s</span> value to it.</p>'));
-    $rules.append($("<p>Non-monster cards cannot be used before first moving them down into your inventory. If your hands are full you can throw these items in the everpresent dungeon flames instead. The value of their melted down remains will be added to your score. But beware! Melted down <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span>magical items</span></span></span></span></span> are worthless on the black market!</p>"));
+    $rules.append($("<p>Non-monster cards cannot be used before first moving them down into your inventory. If your hands are full you can throw these items in the everpresent dungeon flames instead. The value of their melted down remains will be added to your loot. But beware! Melted down <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span>magical items</span></span></span></span></span> are worthless on the black market!</p>"));
     $rules.append($("<p>Also note that <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span><span>potions</span></span></span></span></span></span> will continue to take up a slot of your inventory until the dungeon row refills.</p>"));
     $rules.append($("<p>Escape the dungeon alive with as much loot as you can hold!</p>"));
     $gear.on("click", (event => {
@@ -812,11 +812,14 @@ class View {
 
     const $youLose = $("<div>");
     $youLose.addClass("you-lose");
-    $youLose.append($(`<img src="https://i.imgur.com/MadL9Zr.png"/>`));
+    $youLose.append($(`<img src="https://i.imgur.com/YeVnPoy.png"/>`));
 
     const $youWin = $("<div>");
     $youWin.addClass("you-win");
-    $youWin.append($(`<img src="https://i.imgur.com/tlfOByO.png"/>`));
+    $youWin.append($(`<img src="https://i.imgur.com/KzG4w6r.png"/>`));
+    if (this.board.PlayerRow.spaces[0].length > 0) {
+      $youWin.append($(`<h1>Loot: <span>${this.board.PlayerRow.spaces[0][0].specialValue}</span></h1>`));
+    }
 
     if (this.board.PlayerRow.spaces[0].length === 0) {
       this.$root.append($youLose);
@@ -856,7 +859,7 @@ class View {
       this.setupBoard();
     }));
     this.$root.on("click", ".deck", (event => {
-      this.board.Deck.draw(3);
+      this.board.Deck.draw(50);
       this.$root.empty();
       this.setupBoard();
     }));
