@@ -1,6 +1,7 @@
 * {
   background-color: black;
   font-family: 'Press Start 2P', cursive;
+  user-select: none;
 }
 
 .root {
@@ -8,8 +9,8 @@
 }
 
 .main {
-  height: 100vh;
-  width: 100vw;
+  height: 99vh;
+  width: 99vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
