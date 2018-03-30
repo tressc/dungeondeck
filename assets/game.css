@@ -326,3 +326,7 @@ li {
 .rules span span span span span span{
   color: pink;
 }
+
+.lose-reset {
+  background-color: red;
+}
