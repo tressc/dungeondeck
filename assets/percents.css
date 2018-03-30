@@ -3,28 +3,36 @@
   font-family: 'Press Start 2P', cursive;
 }
 
+.root {
+  overflow: hidden;
+}
+
 .main {
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.logo {
+  margin-top: 50px;
+}
+
 .logo img{
   transform: perspective(500px) rotateX(30deg);
 
-  height: 150px;
-  width: 1000px;
+  height: 110px;
+  width: 750px;
 }
 
 .screen {
   margin-top: 10px;
   border: 7px solid white;
   border-radius: 20px;
-  min-width: 1200px;
-  min-height: 1200px;
+  min-width: 900px;
+  min-height: 900px;
   overflow: hidden;
   position: relative;
 }
@@ -57,8 +65,8 @@ li {
 
 .fire img {
   filter: grayscale(100%);
-  min-height: 400px;
-  min-width: 400px;
+  min-height: 300px;
+  min-width: 300px;
 }
 
 .bright img {
@@ -94,15 +102,15 @@ li {
 }
 
 .card {
-  width: 225px;
-  height: 350px;
+  width: 170px;
+  height: 260px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   background-color: black;
   border: 1px dotted white;
   position: relative;
@@ -122,8 +130,8 @@ li {
 }
 
 .card-slot {
-  width: 225px;
-  height: 350px;
+  width: 170px;
+  height: 260px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -137,16 +145,16 @@ li {
 }
 
 .magic {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .player {
-  font-size: 25px;
+  font-size: 18px;
 }
 
 .screen img {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 110px;
+  max-height: 110px;
 }
 
 .root {
@@ -177,9 +185,14 @@ li {
 }
 
 .settings img {
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+}
+
+.gear img {
   height: 50px;
   width: 50px;
-  cursor: pointer;
 }
 
 .settings-item {
@@ -218,18 +231,18 @@ li {
 }
 
 .deck img {
-  min-height: 300px;
-  min-width: 200px;
+  min-height: 200px;
+  min-width: 150px;
   position: relative;
   top: 0;
   left: 0;
 }
 
 .deck div {
-  font-size: 30px;
+  font-size: 25px;
   position: absolute;
-  top: 150px;
-  left: 330px;
+  top: 110px;
+  left: 175px;
   height: 75px;
   width: 75px;
   border-radius: 50%;
@@ -249,16 +262,16 @@ li {
 }
 
 .you-lose {
-  width: 1200px;
-  height: 1200px;
+  width: 900px;
+  height: 900px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .you-win {
-  width: 1200px;
-  height: 1200px;
+  width: 900px;
+  height: 900px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -266,13 +279,13 @@ li {
 }
 
 .you-lose img {
-  min-width: 700px;
-  min-height: 80px;
+  min-width: 525px;
+  min-height: 60px;
 }
 
 .you-win img {
-  min-width: 700px;
-  min-height: 80px;
+  min-width: 525px;
+  min-height: 60px;
 }
 
 .you-win h1 {
@@ -287,13 +300,15 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 1100px;
-  height: 1200px;
+  width: 825px;
+  height: 900px;
   background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
   z-index: 2000;
   top: 0;
-  left: 80px;
+  left: 60px;
+  overflow-y: scroll;
+  padding-right: 17px;
 }
 
 .rules p {
