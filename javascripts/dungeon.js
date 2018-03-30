@@ -3,6 +3,5 @@ import View from './dd_view.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = $('.dd');
-  window.a = new Board;
-  new View(window.a, root);
+  new View(new Board, root);
 });

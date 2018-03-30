@@ -139,8 +139,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = $('.dd');
-  window.a = new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */];
-  new __WEBPACK_IMPORTED_MODULE_1__dd_view_js__["a" /* default */](window.a, root);
+  new __WEBPACK_IMPORTED_MODULE_1__dd_view_js__["a" /* default */](new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */], root);
 });
 
 
@@ -602,6 +601,9 @@ class Fire {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(2);
+
+
 class View {
   constructor(board, $root) {
     this.board = board;
@@ -733,6 +735,10 @@ class View {
     const $rulesButton = $("<div>");
     $rulesButton.append($(`<img src="https://i.imgur.com/LOyH4LH.png"/>`));
 
+    const $restartButton = $("<div>");
+    $restartButton.append($(`<img src="https://i.imgur.com/mhz61yk.png"/>`));
+
+
     const $rules = $("<div>");
     $rules.addClass("rules");
     $rules.addClass("hidden");
@@ -742,6 +748,8 @@ class View {
     $rules.append($("<p>Non-monster cards cannot be used before first moving them down into your inventory. If your hands are full you can throw these items in the everpresent dungeon flames instead. The value of their melted down remains will be added to your loot. But beware! Melted down <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span>magical items</span></span></span></span></span> are worthless on the black market!</p>"));
     $rules.append($("<p>Also note that <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span><span>potions</span></span></span></span></span></span> will continue to take up a slot of your inventory until the dungeon row refills.</p>"));
     $rules.append($("<p>Escape the dungeon alive with as much loot as you can hold!</p>"));
+
+
     $gear.on("click", (event => {
       if (this.settings) {
         $gear.addClass("turntUp");
@@ -783,15 +791,29 @@ class View {
       }
     }));
 
+    $restartButton.on("click", (event => {
+      event.stopPropagation();
+      $gear.addClass("turntUp");
+      $settingsList.addClass("hidden");
+      this.settings = false;
+      $(".dd").empty();
+      this.board = new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */];
+      this.setupBoard();
+      this.bindEvents();
+    }));
 
-    for (let i = 0; i < 2; i++) {
+
+    for (let i = 0; i < 3; i++) {
       const $settingsItem = $("<li>");
       $settingsItem.addClass("settings-item");
       if (i === 0) {
         $settingsItem.append($soundButton);
         $settingsList.append($settingsItem);
-      } else {
+      } else if (i === 1) {
         $settingsItem.append($rulesButton);
+        $settingsList.append($settingsItem);
+      } else if (i === 2) {
+        $settingsItem.append($restartButton);
         $settingsList.append($settingsItem);
       }
       $settings.append($settingsList);
