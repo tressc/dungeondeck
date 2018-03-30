@@ -263,16 +263,16 @@ li {
 }
 
 .you-lose {
-  width: 900px;
-  height: 900px;
+  min-width: 850px;
+  min-height: 885px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .you-win {
-  width: 900px;
-  height: 900px;
+  min-width: 850px;
+  min-height: 885px;
   display: flex;
   flex-direction: column;
   justify-content: center;

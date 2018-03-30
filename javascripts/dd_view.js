@@ -240,9 +240,11 @@ class View {
     }
 
     if (this.board.PlayerRow.spaces[0].length === 0) {
+      this.$root.append($settings);
       this.$root.append($youLose);
     } else if (this.board.Deck.count === 0 && this.board.DungeonRow.empty()) {
-        this.$root.append($youWin);
+      this.$root.append($settings);
+      this.$root.append($youWin);
     } else {
       this.$root.append($rules);
       this.$root.append($settings);
