@@ -10,11 +10,11 @@
 
 .main {
   height: 99vh;
-  width: 99vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 150px;
 }
 
 .logo {
