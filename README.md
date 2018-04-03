@@ -1,5 +1,5 @@
 ## Dungeon Deck
-------
+
 
 Live: https://tressc.github.io/dungeondeck/
 
