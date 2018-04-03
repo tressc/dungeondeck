@@ -31,6 +31,20 @@ users can begin playing as fast as possible, and learn by doing instead of by re
 
 Instead of music, the only sound in the game is that of a crackling fire. Looping an audio fire in vanilla HTML produces a small, but noticeable gap in the audio. To resolve this, I used the **Howler.js** library, which allows for more fine tuned manipulation of audio files. In addition to removing the gap from the loop, I also lowered the volume on the track. There is a button in the settings dropdown for users to toggle the audio on and off.
 
+```javascript
+<script type="text/javascript">
+  var sound = new Howl({
+    src: ['./assets/fire1.wav'],
+    volume: 0.3,
+    sprite: {
+      main: [-10, 2000, true]
+    }
+  });
+
+  sound.play('main');
+</script>
+```
+
 ### Settings
 
 Outside of actual gameplay, the user should be able to adjust the game's audio, read the rules, and restart the game. I added a settings dropdown to provide this functionality. I added some transition effects with CSS to make interacting with the settings dropdown more intuitive and pleasing.
