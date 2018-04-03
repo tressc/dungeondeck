@@ -25,7 +25,7 @@ While Dungeon Deck does have written rules that can be found in the settings
 dropdown, the standard in digital games is an in-game tutorial so that new
 users can begin playing as fast as possible, and learn by doing instead of by reading. To this end, I added a blue outline to all legal targets of the currently selected card. For aesthetic reasons, I didn't want a rectangular outline around the fire, so when the fire is a legal target it gets brighter instead. The brightness of the fire is perhaps too subtle for players to notice if they haven't read the rules, so I am currently rethinking this approach.
 
-![](https://media.giphy.com/media/1mfY0CpAjcTozqJ9dz/giphy.gif)
+![](https://media.giphy.com/media/YkOIed3b1D5wpvVLN7/giphy.gif)
 
 #### Sound
 
