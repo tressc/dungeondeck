@@ -13,7 +13,7 @@ class View {
     this.bindEvents();
   }
 
-  setupBoard() {
+  setupBoard(restarted = false) {
 
     this.$root.addClass("root");
 
@@ -153,7 +153,8 @@ class View {
 
     if (this.board.Deck.count === 50 &&
         this.board.DungeonRow.count === 4 &&
-        this.board.moveBuffer === null && this.hasClicked === false) {
+        this.board.moveBuffer === null && this.hasClicked === false &&
+        restarted === false) {
             this.rules = true;
             $rules.removeClass("hidden");
         }
@@ -206,7 +207,7 @@ class View {
       this.settings = false;
       $(".dd").empty();
       this.board = new Board;
-      this.setupBoard();
+      this.setupBoard(true);
       this.bindEvents();
     }));
 
