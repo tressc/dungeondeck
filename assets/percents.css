@@ -319,6 +319,18 @@ li {
   line-height: 2.0;
 }
 
+.okay {
+  font-size: 30px;
+  border-radius: 10px;
+  padding: 30px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  background-color: white;
+  color: black;
+}
+
 .rules span{
   color: limegreen;
 }
@@ -342,15 +354,3 @@ li {
 .rules span span span span span span{
   color: pink;
 }*/
-
-.okay {
-  font-size: 150%;
-  border-radius: 10px;
-  width: 30%;
-  height: 150%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  color: black;
-}
