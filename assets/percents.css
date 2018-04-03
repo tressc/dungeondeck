@@ -12,7 +12,6 @@
   height: 99vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin-left: 150px;
 }
@@ -301,6 +300,7 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   width: 825px;
   height: 900px;
   background-color: rgba(0, 0, 0, 0.8);
@@ -313,7 +313,7 @@ li {
 }
 
 .rules p {
-  margin-top: 50px;
+  margin-top: 40px;
   margin-left: 100px;
   margin-right: 150px;
   line-height: 2.0;
@@ -331,7 +331,7 @@ li {
   color: red;
 }
 
-.rules span span span span{
+/*.rules span span span span{
   color: yellow;
 }
 
@@ -341,4 +341,16 @@ li {
 
 .rules span span span span span span{
   color: pink;
+}*/
+
+.okay {
+  font-size: 150%;
+  border-radius: 10px;
+  width: 30%;
+  height: 150%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
 }

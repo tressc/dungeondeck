@@ -60,91 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Card {
-  constructor(suit, value, img) {
-    this.suit = suit;
-    this.value = value;
-    this.destroyed = false;
-    this.specialValue = 0;
-    this.frozen = false;
-    this.img = img;
-    this.validTarget = false;
-  }
-
-  updateValue(change) {
-    this.value += change;
-  }
-
-  updateSpecial(change) {
-    this.specialValue += change;
-  }
-
-  destroy() {
-    this.destroyed = true;
-  }
-
-  freeze() {
-    this.frozen = true;
-  }
-
-}
-
-Card.suits = [
-  "shields",
-  "swords",
-  "coins",
-  "potions",
-  "monsters",
-  "magic"
-];
-
-Card.values = [
-  2, 3, 4, 5, 6, 7, 8, 9, 10, "magic door"
-];
-
-// gladius: https://i.imgur.com/izEcuUG.png
-
-
-Card.imgs = [
-  "https://i.imgur.com/Rh8gBbL.png",
-  "https://i.imgur.com/1ZbWLXW.png",
-  "https://i.imgur.com/X2gtjkv.png",
-  "https://i.imgur.com/TEn6e6B.png",
-  "https://i.imgur.com/ceKsUWJ.png",
-  "https://i.imgur.com/0JJTGtd.png",
-  "https://i.imgur.com/L89XhPg.png",
-];
-
-/* harmony default export */ __webpack_exports__["a"] = (Card);
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dd_view_js__ = __webpack_require__(7);
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const root = $('.dd');
-  new __WEBPACK_IMPORTED_MODULE_1__dd_view_js__["a" /* default */](new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */], root);
-});
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -394,11 +314,91 @@ class Board {
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Card {
+  constructor(suit, value, img) {
+    this.suit = suit;
+    this.value = value;
+    this.destroyed = false;
+    this.specialValue = 0;
+    this.frozen = false;
+    this.img = img;
+    this.validTarget = false;
+  }
+
+  updateValue(change) {
+    this.value += change;
+  }
+
+  updateSpecial(change) {
+    this.specialValue += change;
+  }
+
+  destroy() {
+    this.destroyed = true;
+  }
+
+  freeze() {
+    this.frozen = true;
+  }
+
+}
+
+Card.suits = [
+  "shields",
+  "swords",
+  "coins",
+  "potions",
+  "monsters",
+  "magic"
+];
+
+Card.values = [
+  2, 3, 4, 5, 6, 7, 8, 9, 10, "magic door"
+];
+
+// gladius: https://i.imgur.com/izEcuUG.png
+
+
+Card.imgs = [
+  "https://i.imgur.com/Rh8gBbL.png",
+  "https://i.imgur.com/1ZbWLXW.png",
+  "https://i.imgur.com/X2gtjkv.png",
+  "https://i.imgur.com/TEn6e6B.png",
+  "https://i.imgur.com/ceKsUWJ.png",
+  "https://i.imgur.com/0JJTGtd.png",
+  "https://i.imgur.com/L89XhPg.png",
+];
+
+/* harmony default export */ __webpack_exports__["a"] = (Card);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dd_view_js__ = __webpack_require__(7);
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const root = $('.dd');
+  new __WEBPACK_IMPORTED_MODULE_1__dd_view_js__["a" /* default */](new __WEBPACK_IMPORTED_MODULE_0__board_js__["a" /* default */], root);
+});
+
+
+/***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(1);
 
 
 class Deck {
@@ -531,7 +531,7 @@ class DungeonRow {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_js__ = __webpack_require__(1);
 
 
 class PlayerRow {
@@ -601,7 +601,7 @@ class Fire {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__board_js__ = __webpack_require__(0);
 
 
 class View {
@@ -617,6 +617,7 @@ class View {
   }
 
   setupBoard() {
+
     this.$root.addClass("root");
 
     const $deck = $("<div>");
@@ -723,7 +724,7 @@ class View {
 
     const $gear = $("<div>");
     $gear.addClass("gear");
-    $gear.append($(`<img src="https://i.imgur.com/K8KgyU1.png"/>`));
+    $gear.append($(`<img src="https://i.imgur.com/InSIwNk.png"/>`));
     $settings.append($gear);
 
     const $settingsList = $("<ul>");
@@ -738,6 +739,9 @@ class View {
     const $restartButton = $("<div>");
     $restartButton.append($(`<img src="https://i.imgur.com/mhz61yk.png"/>`));
 
+    const $okayButton = $("<p>");
+    $okayButton.addClass("okay");
+    $okayButton.text("Got it!");
 
     const $rules = $("<div>");
     $rules.addClass("rules");
@@ -745,10 +749,17 @@ class View {
     $rules.append($(`<p>Greetings adventurer... In order to escape this dungeon you must clear all the cards from the deck and dungeon (top) row.</p>`));
     $rules.append($("<p>The deck displays the number of its remaining cards, and the dungeon row refills whenever it contains <span><span><span>three</span></span></span> open spaces.</p>"));
     $rules.append($('<p>Begin by selecting a card. Selected cards are highlighted in <span>green</span>. You can unselect a card by clicking on it again. All valid targets for that card will be highlighted in <span><span>blue</span></span>. Click on a <span><span>target</span></span> to apply the <span>selected card\'s</span> value to it.</p>'));
-    $rules.append($("<p>Non-monster cards cannot be used before first moving them down into your inventory. If your hands are full you can throw these items in the everpresent dungeon flames instead. The value of their melted down remains will be added to your loot. But beware! Melted down <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span>magical items</span></span></span></span></span> are worthless on the black market!</p>"));
-    $rules.append($("<p>Also note that <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span><span>potions</span></span></span></span></span></span> will continue to take up a slot of your inventory until the dungeon row refills.</p>"));
+    // $rules.append($("<p>Non-monster cards cannot be used before first moving them down into your inventory. If your hands are full you can throw these items in the everpresent dungeon flames instead. The value of their melted down remains will be added to your loot. But beware! Melted down <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span>magical items</span></span></span></span></span> are worthless on the black market!</p>"));
+    // $rules.append($("<p>Also note that <span><span><span><span>coins</span></span></span></span> and <span><span><span><span><span><span>potions</span></span></span></span></span></span> will continue to take up a slot of your inventory until the dungeon row refills.</p>"));
     $rules.append($("<p>Escape the dungeon alive with as much loot as you can hold!</p>"));
+    $rules.append($okayButton);
 
+    if (this.board.Deck.count === 50 &&
+        this.board.DungeonRow.count === 4 &&
+        this.board.moveBuffer === null) {
+            this.rules = true;
+            $rules.removeClass("hidden");
+        }
 
     $gear.on("click", (event => {
       if (this.settings) {
@@ -801,6 +812,13 @@ class View {
       this.setupBoard();
       this.bindEvents();
     }));
+
+    $okayButton.on("click", event => {
+      event.stopPropagation();
+      this.rules = false;
+      $rules.removeClass("unhidden");
+      $rules.addClass("hidden");
+    });
 
 
     for (let i = 0; i < 3; i++) {
