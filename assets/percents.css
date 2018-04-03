@@ -220,13 +220,13 @@ li {
 
 .unhidden {
   opacity: 1;
-  transition: 2s;
+  transition: 1.5s;
   visibility: visible;
 }
 
 .hidden {
   opacity: 0;
-  transition: 2s;
+  transition: 1.5s;
   visibility: hidden;
 }
 

@@ -611,6 +611,7 @@ class View {
     this.settings = false;
     this.sound = true;
     this.rules = false;
+    this.hasClicked = false;
 
     this.setupBoard();
     this.bindEvents();
@@ -756,7 +757,7 @@ class View {
 
     if (this.board.Deck.count === 50 &&
         this.board.DungeonRow.count === 4 &&
-        this.board.moveBuffer === null) {
+        this.board.moveBuffer === null && this.hasClicked === false) {
             this.rules = true;
             $rules.removeClass("hidden");
         }
@@ -878,6 +879,7 @@ class View {
 
   bindEvents() {
     this.$root.on("click", "li", (event => {
+      this.hasClicked = true;
       let location;
       let card = null;
       let idx = $(event.currentTarget).data("pos");
